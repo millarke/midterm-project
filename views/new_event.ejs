@@ -29,42 +29,41 @@
   </head>
 
   <body>
+    <!-- nav bar -->
     <header>
       <%- include("partials/_header") %>
     </header>
+<section>
+    <section class="title">
+      <h3>
+        Step 1
+      </h3>
+      <h1>
+        Create your event:
+      </h1>
+    </section>
 
-    <h1>
-      Create your event:
-    </h1>
-    <form class="form" action="/new-event" method="POST">
-      <div class="form">
-        <label for="form-group mb-2">Name:</label>
-        <input class="text type="text" name="name" placeholder="Your Name">
-        <button type="submit" class="btn btn-primary">Submit</button>
+<!-- form -->
+    <form class="event-form" action="/new-event" method="POST">
+      <div class="form-group mb-2">
+        <input type="name" class="form-control" name="name" placeholder="Enter your name">
       </div>
       <div class="form-group mb-2">
-        <label for="email">Email address:</label>
-        <input type="email" class="form-control" name="email" placeholder="email@example.com">
+        <input type="email" class="form-control" name="email" placeholder="Enter your email">
       </div>
       <div class="form-group mb-2">
-        <label for="event-name">Event Title:</label>
-        <input type="text" class="form-control" name="event-name" placeholder="Your Event Name">
+        <input type="text" class="form-control" name="event-name" placeholder="What's the event?">
       </div>
       <div class="form-group mb-2">
-        <label for="event-name">Location:</label>
-        <input type="text" class="form-control" name="location" placeholder="Location of your event">
+        <input type="text" class="form-control" name="location" placeholder="Where is your event located?">
       </div>
       <div class="form-group mb-2">
-        <label for="description">Description:</label>
-        <input type="text" class="form-control" name="description" placeholder="Description of your event">
+        <input type="text" class="form-control" name="description" placeholder="Describe your event">
       </div>
-
-
     </form>
-
-
-    <button>
-      Create Event
-    </button>
+    <div class="next-button">
+      <button type="submit" class="btn btn-primary">Next</button>
+    </div>
+    </section>
   </body>
 </html>
