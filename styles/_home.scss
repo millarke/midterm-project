@@ -1,8 +1,11 @@
-div {
-  font-family: Arial, Helvetica, sans-serif;
 
+.main {
+  font-family: Arial, Helvetica, sans-serif;
   h1 {
-    display: flex;
-    background-color: $home-background;
+    padding: 0.5em;
+  }
+  .main-button {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif
   }
 }
