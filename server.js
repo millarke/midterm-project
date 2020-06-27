@@ -54,6 +54,13 @@ app.get("/new", (req, res) => {
   res.render("new_event");
 });
 
+app.get("/events", (req, res) => {
+  res.render("events");
+});
+
+app.get("/create/details", (req, res) => {
+  res.render("date_options");
+});
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
