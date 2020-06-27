@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
+
+    <!-- App CSS -->
+    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+
+    <!-- External JS -->
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
+
+    <title>Home Page</title>
+  </head>
+
+  <body>
+    <header>
+      <%- include("partials/_header") %>
+    </header>
+
+    <h1>
+      Create your event:
+    </h1>
+    <form class="form" action="/new-event" method="POST">
+      <div class="form">
+        <label for="form-group mb-2">Name:</label>
+        <input class="text type="text" name="name" placeholder="Your Name">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+      <div class="form-group mb-2">
+        <label for="email">Email address:</label>
+        <input type="email" class="form-control" name="email" placeholder="email@example.com">
+      </div>
+      <div class="form-group mb-2">
+        <label for="event-name">Event Title:</label>
+        <input type="text" class="form-control" name="event-name" placeholder="Your Event Name">
+      </div>
+      <div class="form-group mb-2">
+        <label for="event-name">Location:</label>
+        <input type="text" class="form-control" name="location" placeholder="Location of your event">
+      </div>
+      <div class="form-group mb-2">
+        <label for="description">Description:</label>
+        <input type="text" class="form-control" name="description" placeholder="Description of your event">
+      </div>
+
+
+    </form>
+
+
+    <button>
+      Create Event
+    </button>
+  </body>
+</html>
