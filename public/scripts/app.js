@@ -1,3 +1,5 @@
+const { Router } = require("express");
+
 $(() => {
   $.ajax({
     method: "GET",
@@ -6,5 +8,20 @@ $(() => {
     for(user of users) {
       $("<div>").text(user.name).appendTo($("body"));
     }
-  });;
+  })
 });
+
+
+// $(() => {
+//   $.ajax({
+//     method: "GET",
+//     url: "/new"
+//   }).done((events) => {
+//     // console.log("I have returned with", events)
+//     // for(user of users) {
+//     //   $("<div>").text(user.name).appendTo($("body"));
+  
+//   })
+// });
+
+
