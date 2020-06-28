@@ -8,9 +8,26 @@
 const express = require('express');
 const router  = express.Router();
 
-module.exports = (db) => {
+const addUser = function(db, user) {
+
+  const queryString = `
+  INSERT INTO users (name, email)
+  VALUES ($1, $2)
+  RETURNING *;
+  `;
+
+  return db.query(queryString, [user.name, user.email])
+    .then(res => res.rows)
+    .catch(err => console.error('query error', err.stack));
+};
+exports.addUser = addUser;
+
+
+const route = function(db) {
   router.get("/", (req, res) => {
-    db.query(`SELECT * FROM users;`)
+    db.query(`
+    SELECT * FROM users;
+    `)
       .then(data => {
         const users = data.rows;
         res.json({ users });
@@ -23,3 +40,5 @@ module.exports = (db) => {
   });
   return router;
 };
+exports.route = route;
+
