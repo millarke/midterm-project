@@ -33,16 +33,9 @@
       <%- include("partials/_header") %>
     </header>
     <!-- event url -->
-<section class="events-url">
-    <h1>
-      New Event
-    </h1>
-    <div class="event-url">
-    <h4>
-      https://doodle.com/create
-    </h4>
-  </div>
-</section>
+    <header>
+      <%- include("partials/_event_url") %>
+    </header>
 
 <!-- event form, users can select options -->
     <form class="options-form" action="/create/details" method="POST">
