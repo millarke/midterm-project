@@ -32,20 +32,20 @@
     <header>
       <%- include("partials/_header") %>
     </header>
-
+    <!-- event url -->
+<section class="events-url">
     <h1>
-      Events
+      New Event
     </h1>
-    <table class="table">
-    <tbody>
-    <tr>
-      <td class="table-success">
-    <h3>https://doodle.com/create</h3>
-    </td>
-    </tr>
-    </tbody>
-  </table>
-    <form class="form" action="/create/details" method="POST">
+    <div class="event-url">
+    <h4>
+      https://doodle.com/create
+    </h4>
+  </div>
+</section>
+
+<!-- event form, users can select options -->
+    <form class="options-form" action="/create/details" method="POST">
       <table class="table">
         <thead class="thead-dark">
           <tr>
@@ -67,7 +67,6 @@
             <td><div class="form-check">
               <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
             </div></td>
-  
           </tr>
           <tr>
             <th scope="row">user2</th>
@@ -95,12 +94,9 @@
           </tr>
         </tbody>
       </table>
-    
-      </table>
-          <header>
-            <%- include("partials/_add_attendee") %>
-          </header>
-
     </form>
+          <section>
+            <%- include("partials/_add_attendee") %>
+          </section>
   </body>
 </html>
