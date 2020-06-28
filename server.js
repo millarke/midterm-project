@@ -49,11 +49,16 @@ app.use("/api/widgets", widgetsRoutes(db));
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
+
 app.get("/", (req, res) => {
   res.render("index");
 });
 
-app.get("/new", (req, res) => {
+// app.get("/new", (req, res) => {
+//   res.render("new_event");
+// });
+
+app.get("/new-event", (req, res) =>{
   res.render("new_event");
 });
 
@@ -63,7 +68,7 @@ app.post("/new-event", (req, res) => {
 
   usersRoutes.addUser(db, user);
 
-  res.redirect('/create/details');
+  res.redirect('/choose-dates');
 });
 
 app.get("/events", (req, res) => {
@@ -77,21 +82,20 @@ app.get("/choose-dates", (req, res) => {
 
 
 // sets the button to redirect to urls_login.
-app.post("/home", (req, res) => {
-  res.redirect("/");
-});
+
+// app.post("/home", (req, res) => {
+//   res.redirect("/");
+// });
 
 
-app.post("/new-event", (req, res) => {
-  res.redirect("/new");
-});
+// app.post("/new-event", (req, res) => {
+//   res.redirect("/new");
+// });
 
 
-app.post("/create", (req, res) => {
-  res.redirect("/events");
-});
-
-
+// app.post("/create", (req, res) => {
+//   res.redirect("/events");
+// });ß
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
