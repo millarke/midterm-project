@@ -10,7 +10,9 @@ header {
     color: $nav-color;
   }
   .logo {
+    background-color:  $nav-bg-color;
     font-size: $logo-font-size;
     font-weight: bold;
+    border-color:  $nav-bg-color;
   }
 }
