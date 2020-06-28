@@ -70,9 +70,28 @@ app.get("/events", (req, res) => {
   res.render("events");
 });
 
-app.get("/create/details", (req, res) => {
+app.get("/choose-dates", (req, res) => {
   res.render("date_options");
 });
+
+
+
+// sets the button to redirect to urls_login.
+app.post("/home", (req, res) => {
+  res.redirect("/");
+});
+
+
+app.post("/new-event", (req, res) => {
+  res.redirect("/new");
+});
+
+
+app.post("/create", (req, res) => {
+  res.redirect("/events");
+});
+
+
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
