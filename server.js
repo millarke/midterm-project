@@ -74,12 +74,6 @@ app.get("/choose-dates", (req, res) => {
 
 
 
-// sets the button to redirect to urls_login.
-app.post("/home", (req, res) => {
-  res.redirect("/");
-});
-
-
 app.post("/new-event", (req, res) => {
   res.redirect("/new");
 });

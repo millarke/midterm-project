@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - [Vue] Copy to clipboard</title>
+  <link rel='stylesheet' href='https://unpkg.com/prismjs@1.6.0/themes/prism.css'>
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css'>
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div id="app" v-cloak>
+    <div class="url-container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-control wizard-form-control d-flex align-items-center testing-code px-20px mb-10px">
+                    <span class="title">Testing Code:</span>
+                    <span class="code text-red">{{ testidngCode }}</span>
+                    <span class="btn btn-info text-white copy-btn ml-auto" @click.stop.prevent="copyTestingCode">
+              Copy
+            </span>
+                    <input type="hidden" id="testing-code" :value="testingCode">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- partial -->
+  <script src='https://unpkg.com/vue@2.3.2/dist/vue.js'></script>
+<script src='https://unpkg.com/prismjs@1.6.0/prism.js'></script>
+<script  src="/../../public/scripts/script.js"></script>
+
+</body>
+</html>
