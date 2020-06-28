@@ -15,6 +15,7 @@ const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
 const db = new Pool(dbParams);
 db.connect();
+// const usersRoute = require('./routes/users.js');
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -38,8 +39,10 @@ const widgetsRoutes = require("./routes/widgets");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
-app.use("/api/users", usersRoutes(db));
+
+app.use("/api/users", usersRoutes.route(db));
 app.use("/api/widgets", widgetsRoutes(db));
+
 // Note: mount other resources here, using the same pattern above
 
 
@@ -52,6 +55,15 @@ app.get("/", (req, res) => {
 
 app.get("/new", (req, res) => {
   res.render("new_event");
+});
+
+app.post("/new-event", (req, res) => {
+  const user = {name: req.body.name, email: req.body.email};
+  const event = {title: req.body['event-name'], description: req.body.description, location: req.body.location};
+
+  usersRoutes.addUser(db, user);
+
+  res.redirect('/create/details');
 });
 
 app.get("/events", (req, res) => {
