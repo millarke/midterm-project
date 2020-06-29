@@ -59,6 +59,7 @@
 }
 
 .start-calendars {
+  background: #b1dbc786;
   border: solid;
   display: flex;
   flex-direction: column;
@@ -67,11 +68,30 @@
   margin-right: 40%;
   margin-left: 20%;
   margin-top: 2em;
+  text-align: center;
 
   .start-date, .start-time {
     padding: 0.5em;
     border: none;
-    margin: 1em;
+    margin-bottom: 1em;
   }
 }
 
+.end-calendars {
+  background: #dbbbb186;
+  border: solid;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  padding: 1em;
+  margin-right: 40%;
+  margin-left: 20%;
+  margin-top: 2em;
+  text-align: center;
+
+  .end-date, .end-time {
+    padding: 0.5em;
+    border: none;
+    margin-bottom: 1em;
+  }
+}
