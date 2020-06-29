@@ -57,6 +57,11 @@ const eventsRoutes = require("./routes/events");
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
+app.post('/add-new-date-to-options', function (req, res) {
+  
+  console.log('the_date:', req.body.date );
+  console.log('the_date:', req.body.time );
+});
 
 app.get("/home", (req, res) => {
   res.render("index");
