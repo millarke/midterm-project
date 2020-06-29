@@ -8,29 +8,30 @@
 const express = require('express');
 const router  = express.Router();
 
-const addUser = function(db, user) {
+const addEvent = function(db, event) {
 
   const queryString = `
-  INSERT INTO users (name, email)
-  VALUES ($1, $2)
+  INSERT INTO events (user_id, title, description, location, uniqueURL)
+  VALUES ($1, $2, $3, $4, $5)
   RETURNING *;
   `;
 
-  return db.query(queryString, [user.name, user.email])
-    .then(res => res.rows[0]);
+  return db.query(queryString, [event.user_id, event.title, event.description, event.location, event.uniqueURL])
+  // return db.query(queryString, [event.name, event.title, event.description, event.location, event.uniqueURL])
+    .then(res => res.rows);
   // .catch(err => console.error('query error', err.stack));
 };
-exports.addUser = addUser;
+exports.addEvent = addEvent;
 
-
+// this doesn't actually do anything yet, if we want it to we'll need to change the route variable at the bottom here and in users.js and both in server.js
 const route = function(db) {
   router.get("/", (req, res) => {
     db.query(`
-    SELECT * FROM users;
+    SELECT * FROM events;
     `)
       .then(data => {
-        const users = data.rows;
-        res.json({ users });
+        const events = data.rows;
+        res.json({ events });
       })
       .catch(err => {
         res

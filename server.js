@@ -38,13 +38,17 @@ app.use(express.static("public"));
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/users");
-const widgetsRoutes = require("./routes/widgets");
+const eventsRoutes = require("./routes/events");
+// const widgetsRoutes = require("./routes/widgets");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 
-app.use("/api/users", usersRoutes.route(db));
-app.use("/api/widgets", widgetsRoutes(db));
+// app.use("/api/users", usersRoutes.route(db));
+// idk what next line is actually doing
+// app.use("/api/events", eventsRoutes.route(db));
+//we don't need this wigits line below
+// app.use("/api/widgets", widgetsRoutes(db));
 
 // Note: mount other resources here, using the same pattern above
 
@@ -59,20 +63,27 @@ app.get("/home", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.redirect("/home")
-})
+  res.redirect("/home");
+});
 
 app.get("/new-event", (req, res) =>{
   res.render("new_event");
 });
 
 app.post("/new-event", (req, res) => {
+
+  const randoString = generateRandomString();
+
   const user = {name: req.body.name, email: req.body.email};
-  const event = {title: req.body['event-name'], description: req.body.description, location: req.body.location};
-
-  usersRoutes.addUser(db, user);
-
-  res.redirect('/choose-dates');
+  usersRoutes.addUser(db, user)
+    .then(userDb => {
+      const event = {user_id: userDb.id, title: req.body['event-name'], description: req.body.description, location: req.body.location, uniqueURL: randoString};
+      eventsRoutes.addEvent(db, event)
+        .then(() => {
+          res.redirect('/choose-dates');
+        });
+    })
+    .catch(err => console.error('query error', err.stack));
 });
 
 app.get("/events", (req, res) => {
