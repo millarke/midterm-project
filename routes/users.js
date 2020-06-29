@@ -17,8 +17,8 @@ const addUser = function(db, user) {
   `;
 
   return db.query(queryString, [user.name, user.email])
-    .then(res => res.rows)
-    .catch(err => console.error('query error', err.stack));
+    .then(res => res.rows[0]);
+  // .catch(err => console.error('query error', err.stack));
 };
 exports.addUser = addUser;
 

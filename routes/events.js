@@ -10,22 +10,16 @@ const router  = express.Router();
 
 const addEvent = function(db, event) {
 
-  // const queryString = `
-  // INSERT INTO events (user_id, title, description, location, uniqueURL)
-  // VALUES ($1, $2, $3, $4, $5)
-  // RETURNING *;
-  // `;
-
   const queryString = `
   INSERT INTO events (user_id, title, description, location, uniqueURL)
   VALUES ($1, $2, $3, $4, $5)
   RETURNING *;
   `;
 
-  return db.query(queryString, [1, event.title, event.description, event.location, event.uniqueURL])
+  return db.query(queryString, [event.user_id, event.title, event.description, event.location, event.uniqueURL])
   // return db.query(queryString, [event.name, event.title, event.description, event.location, event.uniqueURL])
-    .then(res => res.rows)
-    .catch(err => console.error('query error', err.stack));
+    .then(res => res.rows);
+  // .catch(err => console.error('query error', err.stack));
 };
 exports.addEvent = addEvent;
 
