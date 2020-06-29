@@ -27,12 +27,7 @@
 
     <!-- DATE PICKER -->
 
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-
-    <title>Dates</title>
+      <title>Dates</title>
   </head>
 
   <body>
@@ -53,22 +48,9 @@
       <%- include("partials/_options_container") %>
     </section>
 
-    <input type="text" name="daterange" value="01/01/2018 - 01/15/2018" />
-    <input type="text" name="datetimes" />
-
-    <script>
-    $(function() {
-      $('input[name="datetimes"]').daterangepicker({
-        timePicker: true,
-        startDate: moment().startOf('hour'),
-        endDate: moment().startOf('hour').add(32, 'hour'),
-        locale: {
-          format: 'M/DD hh:mm A'
-        }
-      });
-    });
-    </script>
-
+    <input type="date">
+    <input type="time">
+    
 
 
   </body>
