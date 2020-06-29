@@ -10,7 +10,8 @@
     background-color:  $nav-bg-color;
     font-size: $logo-font-size;
     font-weight: bold;
-    border-color:  $nav-bg-color;
+    color: #ced9df;
+    text-decoration: none;
   }
 }
 
@@ -18,8 +19,18 @@
 
 @media only screen and (min-width: 1024px) {
   .nav-button {
-
+    border: none;
+    background-color: #e29e21;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    font-weight: bold;
   }
-
+}
+@media only screen and (max-width: 1023px) {
+  .nav-button {
+    display: none;
+  }
 }
 
