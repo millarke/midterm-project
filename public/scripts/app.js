@@ -8,7 +8,7 @@ $(() => {
     for(user of users) {
       $("<div>").text(user.name).appendTo($("body"));
     }
-  })
+  });
 });
 
 
@@ -23,7 +23,7 @@ $(() => {
 //     // console.log("I have returned with", events)
 //     // for(user of users) {
 //     //   $("<div>").text(user.name).appendTo($("body"));
-  
+
 //   })
 // });
 
