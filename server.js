@@ -45,9 +45,8 @@ const eventsRoutes = require("./routes/events");
 // Note: Feel free to replace the example routes below with your own
 
 // app.use("/api/users", usersRoutes.route(db));
-// idk what next line is actually doing
 // app.use("/api/events", eventsRoutes.route(db));
-//we don't need this wigits line below
+// we don't need this wigits line below
 // app.use("/api/widgets", widgetsRoutes(db));
 
 // Note: mount other resources here, using the same pattern above
@@ -104,7 +103,8 @@ app.post("/new-event", (req, res) => {
         .then(() => {
           //TODO is this bad practice
           // currentEventUniqueURL = randoString;
-          res.render('date_options', { randoString });
+          const templateVars = { randoString, event, user };
+          res.render('date_options', templateVars);
         });
     })
     .catch(err => console.error('query error', err.stack));
