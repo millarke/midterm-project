@@ -57,17 +57,13 @@ const eventsRoutes = require("./routes/events");
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
-app.post('/add-start-date-to-options', function (req, res) {
 
-  console.log('the_date:', req.body.startDate);
-  console.log('the_time:', req.body.startTime);
-});
+app.post('/add-dates-to-options', function (req, res) {
 
-
-app.post('/add-end-date-to-options', function (req, res) {
-
-  console.log('the_date:', req.body.endDate);
-  console.log('the_time:', req.body.endTime);
+  console.log('the_start_date:', req.body.startDate);
+  console.log('the_start_time:', req.body.startTime);
+  console.log('the_end_date:', req.body.endDate);
+  console.log('the_ens_time:', req.body.endTime);
 });
 
 //--------- home -----------
