@@ -44,18 +44,31 @@
       </h1>
     </section>
     <section id="dates-options">
-    <section>
+    <section class="options" id="options-container">
        <%- include("partials/_options_container") %>
     </section>
 
     <form action="add-new-date-to-options" method="POST" id="dates-form">
+    <section class="start-calendars">
+      <p>start</p>
       <h3>Select the optional date for your plan:</h3>
-      <input type="date" name="date" />
+      <input class="start-date" type="date"name="start-date">
       <h3>Select the optional time for your plan:</h3>
-      <input type="time" name="time" />
+      <input class="start-time" type="time" name="start-time">
       <h3>Click on add option to add it to your plan:</h3>
       <input type="submit" value="Add Option" id="button">
-    </form>
-  </section>
+    </section>
+    
+    <section class="end-calendars">
+      <p>end</p>
+      <h3>Select the optional date for your plan:</h3>
+      <input class="end-date" type="date"name="end-date">
+      <h3>Select the optional time for your plan:</h3>
+      <input class="end-time" type="time" name="end-time">
+      <h3>Click on add option to add it to your plan:</h3>
+      <input type="submit" value="Add Option" id="button">
+    </section>
+  </form>
+
   </body>
 </html>
