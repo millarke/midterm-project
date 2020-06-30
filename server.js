@@ -45,9 +45,8 @@ const eventsRoutes = require("./routes/events");
 // Note: Feel free to replace the example routes below with your own
 
 // app.use("/api/users", usersRoutes.route(db));
-// idk what next line is actually doing
 // app.use("/api/events", eventsRoutes.route(db));
-//we don't need this wigits line below
+// we don't need this wigits line below
 // app.use("/api/widgets", widgetsRoutes(db));
 
 // Note: mount other resources here, using the same pattern above
@@ -99,18 +98,25 @@ app.post("/new-event", (req, res) => {
       const event = {user_id: userDb.id, title: req.body['event-name'], description: req.body.description, location: req.body.location, uniqueURL: randoString};
       eventsRoutes.addEvent(db, event)
         .then(() => {
-          //TODO is this bad practice
-          // currentEventUniqueURL = randoString;
-          res.render('date_options', { randoString });
+          const templateVars = { randoString, event, user };
+          res.render('date_options', templateVars);
         });
     })
     .catch(err => console.error('query error', err.stack));
 });
 
-app.get("/events/:uniqueurl", (req, res) => {
+app.post("/events/:uniqueurl", (req, res) => {
+  console.log("WE ARE HERE");
   const myURL = req.params.uniqueurl;
-  // console.log('rly? this worked?: ', myURL);
-  return   res.render("events", { myURL });
+
+  usersRoutes.getUser(db, myURL)
+    .then((row) => {
+      console.log("row: ", row);
+      const templateVars = { event: row , myURL: myURL };
+      res.render("events", templateVars);
+    })
+
+    .catch(err => console.error('query error', err.stack));
 });
 
 app.listen(PORT, () => {

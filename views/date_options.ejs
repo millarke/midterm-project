@@ -36,12 +36,18 @@
     </header>
 
     <section class="dates-title">
-      <h3>
-        Step 2
-      </h3>
       <h1>
-        Input date and times:
+        <%- event.title %>
       </h1>
+      <h4>
+        <%- user.name %>
+      </h4>
+      <h4>
+        <%- event.location %>
+      </h4>
+      <h4>
+        <%- event.description %>
+      </h4>
     </section>
 
     <section id="events-and-options">
@@ -51,6 +57,8 @@
        <!-- put options container here -->
         </div>
           <button type="submit" id="send" class="send-dates-button">
+        <form action="/events/<%- randoString %>" method="POST">
+          <button type="submit" id="button" class="add-date-button">
             Send
           </button>
         </form>
