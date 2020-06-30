@@ -31,16 +31,18 @@
 
     .options-container {
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       border: solid;
       width: 10em;
-      height: 30em;
+      min-height: 30em;
       justify-content: center;
+      flex-direction: column;
 
       .event-option {
         border: solid;
         width: 90%;
         margin-top: 0.45em;
+        margin-bottom: 0.45em;
         display: flex;
         justify-content: flex-start;
         flex-direction: column;
