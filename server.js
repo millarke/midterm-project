@@ -70,20 +70,26 @@ app.post('/add-end-date-to-options', function (req, res) {
   console.log('the_time:', req.body.endTime);
 });
 
-app.get("/home", (req, res) => {
-  res.render("index");
-});
+//--------- home -----------
+// this section is all good
 
 app.get("/", (req, res) => {
   res.redirect("/home");
 });
 
+app.get("/home", (req, res) => {
+  res.render("index");
+});
+
+//--------- new event part 1 ---------
+// this section has problems.
+
+// get /new-event works great, no issues though there is a ? in the URL for some reason
 app.get("/new-event", (req, res) =>{
   res.render("new_event");
 });
 
-
-let currentEventUniqueURL;
+// let currentEventUniqueURL;
 
 // this currently adds to the database
 app.post("/new-event", (req, res) => {
@@ -154,7 +160,7 @@ app.get("/events/:uniqueurl", (req, res) => {
 //TODO
 
   const myURL = req.params.uniqueurl;
-  console.log('rly??? this worked????: ', myURL);
+  console.log('rly? this worked?: ', myURL);
 
   //TODO rework this to get the rest of the database stuff
   const queryString = `
@@ -191,11 +197,6 @@ app.get("/events/:uniqueurl", (req, res) => {
   //   res.render("login_prompt", templateVars);
   // }
 });
-
-
-
-
-
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
