@@ -53,7 +53,7 @@
     <section id="events-and-options">
       <section class="options-with-button" id="options-container">
         <div class="options-container">
-          <%- include("partials/_options_container") %>
+       <!-- put options container here -->
         </div>
         <form action="/events/<%- randoString %>" method="POST">
           <button type="submit" id="button" class="add-date-button">
@@ -63,26 +63,21 @@
       </section>
 
       <section class="calendars">
-        <form action="add-start-date-to-options" method="POST" id="dates-form">
+        <form action="add-dates-to-options" method="POST" id="dates-form">
           <section class="start-calendars">
-            <h5>Select the start date for your plan:</h5>
+            <h5>Start Date</h5>
             <input class="start-date" type="date"name="startDate">
-              <h5>Select the start time for your plan:</h5>
+              <h5>Start Time</h5>
             <input class="start-time" type="time" name="startTime">
-              <h5>Add option to your plan:</h5>
-            <input type="submit" value="Add Option" class="start-date-button" id="start-date-button">
           </section>
-        </form>
 
-        <form action="add-end-date-to-options" method="POST" id="dates-form">
           <section class="end-calendars">
-            <h5>Select the end date for your plan:</h5>
+            <h5>End Date</h5>
             <input class="end-date" type="date"name="endDate">
-              <h5>Select the end time for your plan:</h5>
+              <h5>End Time</h5>
             <input class="end-time" type="time" name="endTime">
-              <h5>Add option to your plan:</h5>
-            <input type="submit" value="Add Option" class="end-date-button" id="end-date-button">
           </section>
+          <input type="submit" value="Add Option" class="end-date-button" id="end-date-button">
         </form>
 
       </section>
