@@ -1,8 +1,4 @@
-<meta charset="UTF-8">
-  <title>CodePen - [Vue] Copy to clipboard</title>
-  <link rel='stylesheet' href='https://unpkg.com/prismjs@1.6.0/themes/prism.css'>
-<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
-
+ 
 
 <body>
 <!-- partial:index.partial.html -->
@@ -10,13 +6,12 @@
     <div class="url-container">
         <div class="row">
             <div class="col-sm-12">
-                <div class="form-control wizard-form-control d-flex align-items-center testing-code px-20px mb-10px">
+                <div class="form-control wizard-form-control" id="url-copybtn">
                   <%- myURL %>
-
-                    <span class="btn btn-info text-white copy-btn ml-auto" @click.stop.prevent="copyTestingCode">
+                    <span class="btn btn-dark text-white copy-btn ml-auto" @click.stop.prevent="copyTestingCode">
               Copy
             </span>
-                    <input type="hidden" id="testing-code" :value="testingCode">
+                    <input type="hidden" id="testing-code" value="events/<%- myURL %>">
                 </div>
             </div>
         </div>
