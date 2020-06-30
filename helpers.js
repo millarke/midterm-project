@@ -12,7 +12,7 @@ const createOptionsElement = (optionObj) => {
 
   const html = `<div class="event-option">
   <h4 class="option-title">Option</h4>
-  <p class="option-date">Start Date: ${optionObj.startD ate}</p>
+  <p class="option-date">Start Date: ${optionObj.startDate}</p>
   <div class="arrow">&#x25BD;</div>
   <p class="option-date">End Date: ${optionObj.endDate}</p>
 </div>`;
