@@ -64,6 +64,7 @@ app.post('/add-dates-to-options', function (req, res) {
   console.log('the_start_time:', req.body.startTime);
   console.log('the_end_date:', req.body.endDate);
   console.log('the_ens_time:', req.body.endTime);
+  res.send(200)
 });
 
 //--------- home -----------
