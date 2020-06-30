@@ -22,6 +22,23 @@ const addUser = function(db, user) {
 };
 exports.addUser = addUser;
 
+const getUser = function(db, uniqueURL) {
+
+  const queryString = `
+  SELECT *
+  FROM users
+  JOIN events
+  ON users.id = events.user_id
+  WHERE uniqueurl = $1;
+  `;
+
+  console.log(queryString);
+
+  return db.query(queryString, [ uniqueURL ])
+    .then(res => res.rows[0])
+    .catch(err => console.error('getUser: ', err.message));
+};
+exports.getUser = getUser;
 
 const route = function(db) {
   router.get("/", (req, res) => {

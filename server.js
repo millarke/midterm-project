@@ -101,8 +101,6 @@ app.post("/new-event", (req, res) => {
       const event = {user_id: userDb.id, title: req.body['event-name'], description: req.body.description, location: req.body.location, uniqueURL: randoString};
       eventsRoutes.addEvent(db, event)
         .then(() => {
-          //TODO is this bad practice
-          // currentEventUniqueURL = randoString;
           const templateVars = { randoString, event, user };
           res.render('date_options', templateVars);
         });
@@ -110,10 +108,18 @@ app.post("/new-event", (req, res) => {
     .catch(err => console.error('query error', err.stack));
 });
 
-app.get("/events/:uniqueurl", (req, res) => {
+app.post("/events/:uniqueurl", (req, res) => {
+  console.log("WE ARE HERE");
   const myURL = req.params.uniqueurl;
-  // console.log('rly? this worked?: ', myURL);
-  return   res.render("events", { myURL });
+
+  usersRoutes.getUser(db, myURL)
+    .then((row) => {
+      console.log("row: ", row);
+      const templateVars = { event: row , myURL: myURL };
+      res.render("events", templateVars);
+    })
+
+    .catch(err => console.error('query error', err.stack));
 });
 
 app.listen(PORT, () => {
