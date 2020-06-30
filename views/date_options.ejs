@@ -46,11 +46,11 @@
 
     <section id="events-and-options">
       <section class="options-with-button" id="options-container">
+        <form action="/events/<%- randoString %>" method="GET">
         <div class="options-container">
        <!-- put options container here -->
         </div>
-        <form action="/events/<%- randoString %>" method="GET">
-          <button type="submit" id="button" class="send-dates-button">
+          <button type="submit" id="send" class="send-dates-button">
             Send
           </button>
         </form>
