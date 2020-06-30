@@ -27,11 +27,6 @@
 
     <!-- DATE PICKER -->
 
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-
     <title>Dates</title>
   </head>
 
@@ -48,28 +43,39 @@
         Input date and times:
       </h1>
     </section>
-
-    <section>
-      <%- include("partials/_options_container") %>
+    <section id="events-and-options">
+    <section class="options-with-button" id="options-container">
+      <div class="options-container">
+       <%- include("partials/_options_container") %>
+        </div>
+       <button id="button" class="add-date-button">
+        Send
+      </button>
     </section>
 
-    <input type="text" name="daterange" value="01/01/2018 - 01/15/2018" />
-    <input type="text" name="datetimes" />
+    <section class="calendars">
+      <form action="add-start-date-to-options" method="POST" id="dates-form">
+        <section class="start-calendars">
+          <h5>Select the start date for your plan:</h5>
+          <input class="start-date" type="date"name="startDate">
+          <h5>Select the start time for your plan:</h5>
+          <input class="start-time" type="time" name="startTime">
+          <h5>Add option to your plan:</h5>
+          <input type="submit" value="Add Option" class="start-date-button" id="start-date-button">
+        </section>
+      </form>
 
-    <script>
-    $(function() {
-      $('input[name="datetimes"]').daterangepicker({
-        timePicker: true,
-        startDate: moment().startOf('hour'),
-        endDate: moment().startOf('hour').add(32, 'hour'),
-        locale: {
-          format: 'M/DD hh:mm A'
-        }
-      });
-    });
-    </script>
-
-
-
+      <form action="add-end-date-to-options" method="POST" id="dates-form">
+        <section class="end-calendars">
+          <h5>Select the end date for your plan:</h5>
+          <input class="end-date" type="date"name="endDate">
+          <h5>Select the end time for your plan:</h5>
+          <input class="end-time" type="time" name="endTime">
+          <h5>Add option to your plan:</h5>
+          <input type="submit" value="Add Option" class="end-date-button" id="end-date-button">
+        </section>
+      </form>
+    </section>
+  </section>
   </body>
 </html>
