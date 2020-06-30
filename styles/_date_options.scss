@@ -117,7 +117,85 @@
      margin-bottom: 1em;
     }
     .end-date-button {
+      border: none;
+      background-color: #e29e21;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-left: 0.5em;
+      padding-right: 1em;
+      padding-top: 0.5em;
+      padding-bottom: 0.5em;
+      font-weight: bold;
+      margin-top: 0.2em;
+    }
+  }
+}
 
+@media only screen and (min-width: 1024px) {
+  .calendars {
+    display: flex;
+    flex-direction: row;
+
+    .start-calendars {
+      background: #b1dbc786;
+      display: flex;
+      flex-direction: column;
+      align-content: center;
+      padding: 1em;
+      padding-right: 2em;
+      padding-left: 2em;
+      text-align: center;
+      margin-right: 1em;
+
+      .start-date, .start-time {
+        padding: 0.5em;
+        border: none;
+        margin-bottom: 1em;
+      }
+      .start-date-button {
+        border: none;
+        background-color: #e29e21;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-left: 0.5em;
+        padding-right: 1em;
+        padding-top: 0.5em;
+        padding-bottom: 0.5em;
+        font-weight: bold;
+        margin-top: 0.2em;
+      }
+    }
+
+    .end-calendars {
+      background: #dbbbb186;
+      display: flex;
+      flex-direction: column;
+      align-content: center;
+      padding: 1em;
+      padding-right: 2em;
+      padding-left: 2em;
+      text-align: center;
+
+      .end-date, .end-time {
+        padding: 0.5em;
+        border: none;
+       margin-bottom: 1em;
+      }
+      .end-date-button {
+        border: none;
+        background-color: #e29e21;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-left: 0.5em;
+        padding-right: 1em;
+        padding-top: 0.5em;
+        padding-bottom: 0.5em;
+        font-weight: bold;
+        margin-top: 0.2em;
+      }
     }
   }
 }
