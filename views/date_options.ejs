@@ -49,7 +49,7 @@
         <div class="options-container">
           <%- include("partials/_options_container") %>
         </div>
-        <form action="/events/<%= uniqueURL %>" method="GET">
+        <form action="/events/<%- randoString %>" method="GET">
           <button type="submit" id="button" class="add-date-button">
             Send
           </button>

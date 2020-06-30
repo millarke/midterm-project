@@ -104,16 +104,16 @@ app.post("/new-event", (req, res) => {
         .then(() => {
           //TODO is this bad practice
           // currentEventUniqueURL = randoString;
-          res.redirect('/choose-dates');
+          res.render('date_options', { randoString });
         });
     })
     .catch(err => console.error('query error', err.stack));
 });
 
 
-app.get("/choose-dates", (req, res) => {
-  res.render("date_options");
-});
+// app.get("/choose-dates", (req, res) => {
+//   res.render("date_options", );
+// });
 
 
 
@@ -163,26 +163,44 @@ app.get("/events/:uniqueurl", (req, res) => {
   console.log('rly? this worked?: ', myURL);
 
   //TODO rework this to get the rest of the database stuff
-  const queryString = `
-  SELECT uniqueURL
-  FROM events
-  WHERE id = ${myURL}
-  `;
+  // const queryString = `
+  // SELECT uniqueURL
+  // FROM events
+  // WHERE id = 2
+  // `;
 
   // VALUES ($1)
 
-  return db.query(queryString, [])
-    .then(resDb => {
-      const uniqueURL = resDb.rows[0].uniqueurl;
-      const templateVars = { uniqueURL };
-      res.render("events", templateVars);
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
+  // return db.query(myURL)
+  // return
+  //   .then(resDb => {
+  //     // const uniqueURL = resDb.rows[0].uniqueurl;
+  //     // console.log('resDb: ', resDb.rows);
+  //     const templateVars = { myURL };
+  //     // res.send("date_options", templateVars);
+  //     res.render("events", templateVars);
+  //     // res.render("events");
+  //   })
+  //   .catch(err => {
+  //     res
+  //       .status(500)
+  //       .json({ error: err.message });
+  // const templateVars = { myURL };
+  //   });
+  // console.log(templateVars);
+  return   res.render("events", { myURL });
 
+
+      // const uniqueURL = resDb.rows[0].uniqueurl;
+      // console.log('resDb: ', resDb.rows);
+      // res.send("date_options", templateVars);
+      // res.render("events");
+
+    // .catch(err => {
+    //   res
+    //     .status(500)
+    //     .json({ error: err.message });
+    // });
 
   // if (req.session.user_id) {
   //   if (req.session.user_id === urlDatabase[req.params.shortURL].userID) {
