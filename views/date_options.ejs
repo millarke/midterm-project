@@ -43,32 +43,39 @@
         Input date and times:
       </h1>
     </section>
-    <section id="dates-options">
-    <section class="options" id="options-container">
+    <section id="events-and-options">
+    <section class="options-with-button" id="options-container">
+      <div class="options-container">
        <%- include("partials/_options_container") %>
+        </div>
+       <button id="button" class="add-date-button">
+        Send
+      </button>
     </section>
 
-    <form action="add-new-date-to-options" method="POST" id="dates-form">
+    <form action="add-start-date-to-options" method="POST" id="dates-form">
     <section class="start-calendars">
       <p>start</p>
       <h3>Select the optional date for your plan:</h3>
-      <input class="start-date" type="date"name="start-date">
+      <input class="start-date" type="date"name="startDate">
       <h3>Select the optional time for your plan:</h3>
-      <input class="start-time" type="time" name="start-time">
+      <input class="start-time" type="time" name="startTime">
       <h3>Click on add option to add it to your plan:</h3>
-      <input type="submit" value="Add Option" id="button">
-    </section>
-    
-    <section class="end-calendars">
-      <p>end</p>
-      <h3>Select the optional date for your plan:</h3>
-      <input class="end-date" type="date"name="end-date">
-      <h3>Select the optional time for your plan:</h3>
-      <input class="end-time" type="time" name="end-time">
-      <h3>Click on add option to add it to your plan:</h3>
-      <input type="submit" value="Add Option" id="button">
+      <input type="submit" value="Add Option" class="start-date-button" id="start-date-button">
     </section>
   </form>
 
+  <form action="add-end-date-to-options" method="POST" id="dates-form">
+    <section class="end-calendars">
+      <p>end</p>
+      <h3>Select the optional date for your plan:</h3>
+      <input class="end-date" type="date"name="endDate">
+      <h3>Select the optional time for your plan:</h3>
+      <input class="end-time" type="time" name="endTime">
+      <h3>Click on add option to add it to your plan:</h3>
+      <input type="submit" value="Add Option" class="end-date-button" id="end-date-button">
+    </section>
+  </form>
+  </section>
   </body>
 </html>
