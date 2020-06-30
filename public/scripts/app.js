@@ -1,5 +1,4 @@
 
-
 $(() => {
   $.ajax({
     method: "GET",
@@ -24,23 +23,5 @@ $(document).ready(function() {
             e.preventDefault();
     return false;
    });
+  });
 });
-
-
-end-date-button
-
-
-
-// $(() => {
-//   $.ajax({
-//     method: "GET",
-//     url: "/api/users"
-//   }).done((users) => {
-//     for(user of users) {
-//       $("<div>").text(user.name).appendTo($("body"));
-//     }
-//   });
-// });
-
-
-
