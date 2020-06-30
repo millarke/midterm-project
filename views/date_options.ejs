@@ -52,13 +52,11 @@
 
     <section id="events-and-options">
       <section class="options-with-button" id="options-container">
-        <form action="/events/<%- randoString %>" method="GET">
-        <div class="options-container">
-       <!-- put options container here -->
-        </div>
+        <form action="/events/<%- randoString %>" method="POST" id="send-dates-to-db">
+          <div class="options-container">
+            <!-- put options container here -->
+          </div>
           <button type="submit" id="send" class="send-dates-button">
-        <form action="/events/<%- randoString %>" method="POST">
-          <button type="submit" id="button" class="add-date-button">
             Send
           </button>
         </form>
@@ -68,20 +66,24 @@
         <form action="add-dates-to-options" method="POST" id="dates-form">
           <section class="start-calendars">
             <h5>Start Date</h5>
-            <input class="start-date" type="date"name="startDate">
-              <h5>Start Time</h5>
-            <input class="start-time" type="time" name="startTime">
+            <input class="start-date" type="date" name="startDate" />
+            <h5>Start Time</h5>
+            <input class="start-time" type="time" name="startTime" />
           </section>
 
           <section class="end-calendars">
             <h5>End Date</h5>
-            <input class="end-date" type="date"name="endDate">
-              <h5>End Time</h5>
-            <input class="end-time" type="time" name="endTime">
+            <input class="end-date" type="date" name="endDate" />
+            <h5>End Time</h5>
+            <input class="end-time" type="time" name="endTime" />
           </section>
-          <input type="submit" value="Add Option" class="end-date-button" id="end-date-button">
+          <input
+            type="submit"
+            value="Add Option"
+            class="end-date-button"
+            id="end-date-button"
+          />
         </form>
-
       </section>
     </section>
   </body>
