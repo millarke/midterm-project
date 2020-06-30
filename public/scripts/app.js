@@ -37,20 +37,9 @@ const renderOptions = function (optionsDB) {
     ...acc, 
     [next.name]: next.value,
      }), {}))
-     
-    //  .map(option => createOptionsElement(option));  
+
 };
 
-// loads previously saved options, don't know if we'll need this
-// const loadOptions = function() {
-//   $("#option-container").empty();
-//   $.ajax("/options", {
-//       method: "GET",
-//   }).then(function(data) {
-//       console.log("loaded the options");
-//       renderOptions(data);
-//   });
-// };
 
 const loadOptions = (options) => {
   console.log(options)
@@ -67,8 +56,7 @@ const loadOptions = (options) => {
 
 
 $(document).ready(function () {
-  // do your things
-  // const form = $('#add-dates-to-options');
+
   $('#dates-form').on('submit', function (event) {
     // prevent form submission
     console.log("running")
@@ -78,17 +66,6 @@ $(document).ready(function () {
     console.log("SERIALIZED", serializedInput)
     renderOptions(serializedInput);
     
-    // $.ajax("/add-dates-to-options" ,{
-    //   method: "POST",
-    //   data: serializedInput,
-    // })
-    //   .then(function (res) {
-    //     loadOptions();
-    //     // $("#tweet-text").val("");
-    //     // $("#counter").val("140")
-    //   })
-
-
     return false;
   });
 });
