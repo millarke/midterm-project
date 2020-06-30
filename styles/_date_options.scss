@@ -1,64 +1,79 @@
-
 .dates-title {
   font-family: Arial, Helvetica, sans-serif;
   text-align: center;
   padding-top: 1em;
 }
-.options {
-  float: right;
-  .options-container {
+
+#button {
+  border: none;
+  background-color: #e29e21;
+  padding-left: 3.5em;
+  padding-right: 3.5em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  font-weight: bold;
+  margin-bottom: 5em;
+  margin-left: 1.5em;
+} 
+
+#dates-options {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-around;
+  // align-items: flex-start;
+  
+  #dates-form {
     display: flex;
-    justify-content: flex-start;
+    width: 50%;
     flex-direction: column;
-    align-items: center;
-    
-    border: solid;
-    // padding: 5em;
-    margin-left: 1em;
-    margin-right: 5em;
-    width: 10em;
-    height: 30em;
-    margin-bottom: 1em;
-    margin-top: 1em;
+    justify-content: center;
 
-    .option {
-      border: solid;
-      // padding: 1em;
-      width: 90%;
-      margin-top: .45em;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      // justify-content: space-between;
-
-      .option-title {
-        background-color: $nav-bg-color;
-        color: white;
-        display: flex;
-        align-content: center;
-        justify-content: center;
-        width: 100%;
-      }
-      .arrow {
-        margin-bottom: .45em;
-      }
-
-      .option-date {
-        font-weight: 600;
-      }
-    }
-  }
-  .add-date-button {
-    border: none;
-    background-color: #e29e21;
-    padding-left: 3.5em;
-    padding-right: 3.5em;
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
-    font-weight: bold;
-    margin-bottom: 5em;
-    margin-left: 1.5em;
   }
 }
+  .options {
+    float: right;
+    .options-container {
+      display: flex;
+      justify-content: flex-start;
+      flex-direction: column;
+      align-items: center;
 
+      border: solid;
+      // padding: 5em;
+      margin-left: 1em;
+      margin-right: 5em;
+      width: 10em;
+      height: 30em;
+      margin-bottom: 1em;
+      margin-top: 1em;
+
+      .option {
+        border: solid;
+        // padding: 1em;
+        width: 90%;
+        margin-top: 0.45em;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        // justify-content: space-between;
+
+        .option-title {
+          background-color: $nav-bg-color;
+          color: white;
+          display: flex;
+          align-content: center;
+          justify-content: center;
+          width: 100%;
+        }
+        .arrow {
+          margin-bottom: 0.45em;
+        }
+
+        .option-date {
+          font-weight: 600;
+        }
+      }
+    }
+ 
+  }
 

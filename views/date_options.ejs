@@ -27,7 +27,7 @@
 
     <!-- DATE PICKER -->
 
-      <title>Dates</title>
+    <title>Dates</title>
   </head>
 
   <body>
@@ -43,17 +43,19 @@
         Input date and times:
       </h1>
     </section>
-
+    <section id="dates-options">
     <section>
-      <%- include("partials/_options_container") %>
+       <%- include("partials/_options_container") %>
     </section>
-    <form action="add-new-date-to-options" method="POST">
-    <input type="date" name="date"/>
-    <input type="time" name="time"/>
-    <input type="submit"/>
 
-  </form>
-
-
+    <form action="add-new-date-to-options" method="POST" id="dates-form">
+      <h3>Select the optional date for your plan:</h3>
+      <input type="date" name="date" />
+      <h3>Select the optional time for your plan:</h3>
+      <input type="time" name="time" />
+      <h3>Click on add option to add it to your plan:</h3>
+      <input type="submit" value="Add Option" id="button">
+    </form>
+  </section>
   </body>
 </html>
