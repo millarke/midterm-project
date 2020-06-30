@@ -70,6 +70,10 @@ app.get("/new-event", (req, res) =>{
   res.render("new_event");
 });
 
+
+let currentEventUniqueURL;
+
+// this currently adds to the database
 app.post("/new-event", (req, res) => {
 
   const randoString = generateRandomString();
@@ -80,19 +84,106 @@ app.post("/new-event", (req, res) => {
       const event = {user_id: userDb.id, title: req.body['event-name'], description: req.body.description, location: req.body.location, uniqueURL: randoString};
       eventsRoutes.addEvent(db, event)
         .then(() => {
+          //TODO is this bad practice
+          // currentEventUniqueURL = randoString;
           res.redirect('/choose-dates');
         });
     })
     .catch(err => console.error('query error', err.stack));
 });
 
-app.get("/events", (req, res) => {
-  res.render("events");
-});
 
 app.get("/choose-dates", (req, res) => {
   res.render("date_options");
 });
+
+
+
+
+// app.get("/events", (req, res) => {
+//   res.render("events");
+//   // console.log("hello!!!");
+// });
+
+
+// app.post("/urls/:shortURL", (req, res) => {
+//   urlDatabase[req.params.shortURL].longURL = req.body.longURL;
+//   res.redirect("/urls");
+// });
+
+
+
+// const getEventID = function(req, res) {
+
+//   const queryString = `
+//   SELECT id
+//   FROM events
+//   WHERE
+//   `;
+
+//   return db.query(queryString, [])
+//     .then(resDb => {
+//       const uniqueURL = resDb.rows[0].uniqueurl;
+//       const templateVars = { uniqueURL };
+//       res.render("events", templateVars);
+//     })
+//     .catch(err => {
+//       res
+//         .status(500)
+//         .json({ error: err.message });
+//     });
+// };
+
+
+
+
+
+app.get("/events/:uniqueurl", (req, res) => {
+//TODO
+
+  const myURL = req.params.uniqueurl;
+  console.log('rly??? this worked????: ', myURL);
+
+  //TODO rework this to get the rest of the database stuff
+  const queryString = `
+  SELECT uniqueURL
+  FROM events
+  WHERE id = ${myURL}
+  `;
+
+  // VALUES ($1)
+
+  return db.query(queryString, [])
+    .then(resDb => {
+      const uniqueURL = resDb.rows[0].uniqueurl;
+      const templateVars = { uniqueURL };
+      res.render("events", templateVars);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+
+
+  // if (req.session.user_id) {
+  //   if (req.session.user_id === urlDatabase[req.params.shortURL].userID) {
+  //     let templateVars = { shortURL: req.params.shortURL, longURL: urlDatabase[req.params.shortURL].longURL, userObject: users[req.session.user_id] };
+  //     res.render("urls_show", templateVars);
+  //   } else {
+  //     res.send("You do not have permission to view this page >:(");
+  //   }
+
+  // } else {
+  //   let templateVars = { userObject: users[req.session.user_id] };
+  //   res.render("login_prompt", templateVars);
+  // }
+});
+
+
+
+
+
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
