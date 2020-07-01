@@ -88,25 +88,32 @@ app.get("/new-event", (req, res) => {
 
 app.post('/dates/new', function (req, res) {
   console.log("=============== req: ", req.body)
-  
+
   const parsedDates = [];
   req.body.dates.map(date => {
    parsedDates.push(JSON.parse(date))
   })
 
-  const eventurl = [];
-  eventurl.push(JSON.parse(req.body.eventId));
-  const eventId = 
-  `
+  const eventURL = [];
+  eventURL.push(req.body.eventurl);
+  // eventURL.push(JSON.parse(req.body.eventurl));
+  console.log("============>>>", eventURL)
+  const eventIdQuery = `
   SELECT id FROM events
-  WHERE uniqueurl = ${eventurl};
+  WHERE uniqueurl = $1 ;
   `;
-  
-  console.log("---------------------------------------------", db.query(eventId));
+
+  db.query(eventIdQuery, eventURL[0])
+  .then(res => {
+    console.log("IS THIS WORKING!", res)
+  })
+  // ${eventurl}
+
+  console.log("---------------------------------------------", db.query(eventIdQuery));
 
   const addOption = function (db, option) {
     const queryString = `
-    
+
 
     INSERT INTO dates (event_id, start_date, start_time, end_date, end_time)
     VALUES ($1, $2, $3, $4, $5)
@@ -114,18 +121,19 @@ app.post('/dates/new', function (req, res) {
     `;
 
 
-    return db.query(queryString, [eventId, parsedDates.start_date, parsedDate.start_time, parsedDate.end_date, parsedDate.end_time])
+    return db.query(queryString, [eventIdQuery, parsedDates.start_date, parsedDate.start_time, parsedDate.end_date, parsedDate.end_time])
       .then(res => {
         // console.log('addOption: ', option);
         console.log('we are here now: ', res.rows);
         return res.rows[0];
-      });
+      })
+      .catch(err => console.error('query error', err.stack))
   };
 
   // const option = { startDate: req.body.startDate, startTime: req.body.startTime, endDate: req.body.endDate, endTime: req.body.endTime }
-  addOption(db, option);
-  res.redirect(`/events/${uniqueurl}`);
-  // res.send(200)
+  // addOption(db, option);
+  // res.redirect(`/events/${uniqueurl}`);
+  res.send(200)
 });
 
 // let currentEventUniqueURL;
