@@ -18,14 +18,15 @@ const createOptionsElement = (optionObj) => {
   //   $("#option-textet").focus();
   // });
 
-  const html = `<div class="event-option">
+  const html = `<form class="event-option" id="option">
   <h4 class="option-title">Option</h4>
   <p class="option-date">Start Date: ${optionObj.startDate}</p>
   <p class="option-date">Start Date: ${optionObj.startTime}</p>
   <div class="arrow">&#x25BD;</div>
   <p class="option-date">End Date: ${optionObj.endDate}</p>
   <p class="option-date">End Date: ${optionObj.endTime}</p>
-</div>`;
+  <input  name="bob" type="hidden" value=${JSON.stringify(optionObj)}/>
+</form>`;
 
   $option.prepend(html);
 };
@@ -74,12 +75,10 @@ $(document).ready(function () {
     return false;
   });
   
-  $('#send-dates-to-db').on('submit', function (event) {
-    console.log('---------------------dates: ', dates)
-    // console.log("=========================> dates: ", dates);
-    const serializedInput = $('#send-dates-to-db').serialize()
-    // const serializedInput = $(this).serializeArray();
-    console.log("sending dates to db: ", event.target)
-    return false;
-  })
+  // $('#send-dates-to-db').on('submit', function (event) {
+  //   console.log('---------------------dates: ', dates)
+  //  $()
+            
+    // })
+   
 });

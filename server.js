@@ -86,10 +86,29 @@ app.get("/new-event", (req, res) => {
   res.render("new_event");
 });
 
-app.post("/dates/new", (req, res) => {
-  console.log("body: ", req.body)
+app.post('/dates/new', function (req, res) {
+  console.log("=============== req: ", req.body)
+  // console.log("==================== triggered!!!!: ")
+  // const addOption = function (db, option) {
+  //   const queryString = `
+  //   INSERT INTO dates (event_id, start_date, start_time, end_date, end_time)
+  //   VALUES ($1, $2, $3, $4, $5)
+  //   RETURNING *;
+  //   `;
+  //   // console.log('queryString: ', queryString);
+  //   console.log('addOption: ', req.body);
+  //   return db.query(queryString, [option.event_id, option.start_date, option.start_time, option.end_date, option.end_time])
+  //     .then(res => {
+  //       // console.log('addOption: ', option);
+  //       console.log('we are here now: ', res.rows);
+  //       return res.rows[0];
+  //     });
+  // };
+  // const option = { startDate: req.body.startDate, startTime: req.body.startTime, endDate: req.body.endDate, endTime: req.body.endTime}
+  // addOption(db, option);
+  // res.redirect("/events/:uniqueurl");
+}); 
 
-})
 // let currentEventUniqueURL;
 
 // this currently adds to the database
