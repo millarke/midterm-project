@@ -71,11 +71,12 @@ $(document).ready(function () {
       $.ajax({
         method: "POST",
         URL: "/send-dates-to-db"
+        
       })
-      .then(() => {
-        const templateVars = { option };
-        res.render("/events/:uniqueurl")
-      })
+      // .then(() => {
+      //   const templateVars = { option };
+      //   res.render("/events/:uniqueurl")
+      // })
       // return false;
     })
   });

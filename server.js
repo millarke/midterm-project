@@ -81,13 +81,18 @@ app.post('/send-dates-to-db', function (req, res) {
     `;
     return db.query(queryString, [option.event_id, option.start_date, option.start_time, option.end_date, option.end_time])
       .then(res => {
-        console.log(res.rows);
+        console.log('we are here now: ', res.rows);
         res.rows[0];
       });
     }
 
     const option = { startDate: req.body.startDate, startTime: req.body.startTime, endDate: req.body.endDate, endTime: req.body.endTime}
     addOption(db, option)
+    .then(() => {
+      // const templateVars = { option };
+      res.render("/events/:uniqueurl")
+    })
+    
    
 
 
