@@ -63,7 +63,7 @@ const eventsRoutes = require("./routes/events");
 //   console.log('the_start_time:', req.body.startTime);
 //   console.log('the_end_date:', req.body.endDate);
 //   console.log('the_ens_time:', req.body.endTime);
-//   res.send(200)
+//   // res.send(200)
 // });
 
 //--------- home -----------
@@ -88,26 +88,45 @@ app.get("/new-event", (req, res) => {
 
 app.post('/dates/new', function (req, res) {
   console.log("=============== req: ", req.body)
-  // console.log("==================== triggered!!!!: ")
-  // const addOption = function (db, option) {
-  //   const queryString = `
-  //   INSERT INTO dates (event_id, start_date, start_time, end_date, end_time)
-  //   VALUES ($1, $2, $3, $4, $5)
-  //   RETURNING *;
-  //   `;
-  //   // console.log('queryString: ', queryString);
-  //   console.log('addOption: ', req.body);
-  //   return db.query(queryString, [option.event_id, option.start_date, option.start_time, option.end_date, option.end_time])
-  //     .then(res => {
-  //       // console.log('addOption: ', option);
-  //       console.log('we are here now: ', res.rows);
-  //       return res.rows[0];
-  //     });
-  // };
-  // const option = { startDate: req.body.startDate, startTime: req.body.startTime, endDate: req.body.endDate, endTime: req.body.endTime}
-  // addOption(db, option);
-  // res.redirect("/events/:uniqueurl");
-}); 
+  
+  const parsedDates = [];
+  req.body.dates.map(date => {
+   parsedDates.push(JSON.parse(date))
+  })
+
+  const eventurl = [];
+  eventurl.push(JSON.parse(req.body.eventId));
+  const eventId = 
+  `
+  SELECT id FROM events
+  WHERE uniqueurl = ${eventurl};
+  `;
+  
+  console.log("---------------------------------------------", db.query(eventId));
+
+  const addOption = function (db, option) {
+    const queryString = `
+    
+
+    INSERT INTO dates (event_id, start_date, start_time, end_date, end_time)
+    VALUES ($1, $2, $3, $4, $5)
+    RETURNING *;
+    `;
+
+
+    return db.query(queryString, [eventId, parsedDates.start_date, parsedDate.start_time, parsedDate.end_date, parsedDate.end_time])
+      .then(res => {
+        // console.log('addOption: ', option);
+        console.log('we are here now: ', res.rows);
+        return res.rows[0];
+      });
+  };
+
+  // const option = { startDate: req.body.startDate, startTime: req.body.startTime, endDate: req.body.endDate, endTime: req.body.endTime }
+  addOption(db, option);
+  res.redirect(`/events/${uniqueurl}`);
+  // res.send(200)
+});
 
 // let currentEventUniqueURL;
 
@@ -129,7 +148,7 @@ app.post("/new-event", (req, res) => {
     .catch(err => console.error('query error', err.stack));
 });
 
-app.post("/events/:uniqueurl", (req, res) => {
+app.get("/events/:uniqueurl", (req, res) => {
   // console.log("WE ARE HERE");
   const myURL = req.params.uniqueurl;
 

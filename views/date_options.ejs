@@ -42,17 +42,21 @@
       <h4>
         <%- user.name %>
       </h4>
+    
+     
       <h4>
         <%- event.location %>
       </h4>
       <h4>
         <%- event.description %>
+        <%- randoString %>
       </h4>
     </section>
 
     <section id="events-and-options">
       <section class="options-with-button" id="options-container">
         <form action="/dates/new" method="POST" id="send-dates-to-db">
+          <input type="hidden" name="eventId" value=<%- randoString %>/>
           <div class="options-container">
             <!-- put options container here -->
           </div>

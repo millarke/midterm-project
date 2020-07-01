@@ -18,19 +18,18 @@ const createOptionsElement = (optionObj) => {
   //   $("#option-textet").focus();
   // });
 
-  const html = `<form class="event-option" id="option">
+  const html = `<div class="event-option" id="option">
   <h4 class="option-title">Option</h4>
   <p class="option-date">Start Date: ${optionObj.startDate}</p>
   <p class="option-date">Start Date: ${optionObj.startTime}</p>
   <div class="arrow">&#x25BD;</div>
   <p class="option-date">End Date: ${optionObj.endDate}</p>
   <p class="option-date">End Date: ${optionObj.endTime}</p>
-  <input  name="bob" type="hidden" value=${JSON.stringify(optionObj)}/>
-</form>`;
-
+  <input name="dates" type="hidden" value=${JSON.stringify(optionObj)} />
+  </div>`;
+  
   $option.prepend(html);
 };
-
 // takes in a database of options and creates html elements out of each option
 const renderOptions = function (optionsDB) {
   // console.log("options: ", optionsDB)
@@ -75,10 +74,6 @@ $(document).ready(function () {
     return false;
   });
   
-  // $('#send-dates-to-db').on('submit', function (event) {
-  //   console.log('---------------------dates: ', dates)
-  //  $()
-            
-    // })
+ 
    
 });
