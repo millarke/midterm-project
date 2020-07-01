@@ -32,11 +32,11 @@ const createOptionsElement = (optionObj) => {
 
 // takes in a database of options and creates html elements out of each option
 const renderOptions = function (optionsDB) {
-  console.log("options: " , optionsDB)
+  console.log("options: ", optionsDB)
   createOptionsElement(optionsDB.reduce((acc, next) => ({
-    ...acc, 
+    ...acc,
     [next.name]: next.value,
-     }), {}))
+  }), {}))
 
 };
 
@@ -62,10 +62,15 @@ $(document).ready(function () {
     console.log("running")
     event.preventDefault();
     const serializedInput = $(this).serializeArray();
-  
+
     console.log("SERIALIZED", serializedInput)
     renderOptions(serializedInput);
-    
+
     return false;
   });
+  $('#send-dates-to-db').on('submit', function (event) {
+    const serializedInput = $(this).serializeArray();
+    console.log(serializedInput)
+    return false;
+  })
 });
