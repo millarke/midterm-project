@@ -59,11 +59,55 @@ const eventsRoutes = require("./routes/events");
 
 app.post('/add-dates-to-options', function (req, res) {
 
+
   console.log('the_start_date:', req.body.startDate);
   console.log('the_start_time:', req.body.startTime);
   console.log('the_end_date:', req.body.endDate);
   console.log('the_ens_time:', req.body.endTime);
   res.send(200)
+
+  // .catch(err => console.error('query error', err.stack));
+});
+
+
+app.post('/send-dates-to-db', function (req, res) {
+
+  const addOption = function (db, option) {
+
+    const queryString = `
+    INSERT INTO dates (event_id, start_date, start_time, end_date, end_time) 
+    VALUES ($1, $2, $3, $4, $5);
+    RETURNING *;
+    `;
+    return db.query(queryString, [option.event_id, option.start_date, option.start_time, option.end_date, option.end_time])
+      .then(res => {
+        console.log(res.rows);
+        res.rows[0];
+      });
+    }
+
+    const option = { startDate: req.body.startDate, startTime: req.body.startTime, endDate: req.body.endDate, endTime: req.body.endTime}
+    addOption(db, option)
+   
+
+
+
+    // const addUser =  function(user) {
+    //   const queryString = `
+    //   INSERT INTO users (name, email, password)
+    //   VALUES ($1, $2, $3)
+    //   RETURNING *;
+    //   `;
+    
+    //   const values = [user.name, user.email, user.password];
+    
+    //   return db.query(queryString, values)
+    //   .then (res => {
+    //     return res.rows[0];
+    //   });
+    // }
+
+
 });
 
 //--------- home -----------
@@ -81,7 +125,7 @@ app.get("/home", (req, res) => {
 // this section has problems.
 
 // get /new-event works great, no issues though there is a ? in the URL for some reason
-app.get("/new-event", (req, res) =>{
+app.get("/new-event", (req, res) => {
   res.render("new_event");
 });
 
@@ -92,10 +136,10 @@ app.post("/new-event", (req, res) => {
 
   const randoString = generateRandomString();
 
-  const user = {name: req.body.name, email: req.body.email};
+  const user = { name: req.body.name, email: req.body.email };
   usersRoutes.addUser(db, user)
     .then(userDb => {
-      const event = {user_id: userDb.id, title: req.body['event-name'], description: req.body.description, location: req.body.location, uniqueURL: randoString};
+      const event = { user_id: userDb.id, title: req.body['event-name'], description: req.body.description, location: req.body.location, uniqueURL: randoString };
       eventsRoutes.addEvent(db, event)
         .then(() => {
           const templateVars = { randoString, event, user };
@@ -112,7 +156,7 @@ app.post("/events/:uniqueurl", (req, res) => {
   usersRoutes.getUser(db, myURL)
     .then((row) => {
       console.log("row: ", row);
-      const templateVars = { event: row , myURL: myURL };
+      const templateVars = { event: row, myURL: myURL };
       res.render("events", templateVars);
     })
 

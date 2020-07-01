@@ -1,4 +1,6 @@
 
+
+// 
 // $(() => {
 //   $.ajax({
 //     method: "GET",
@@ -14,9 +16,6 @@
 // takes in an option object and returns the html of the options
 const createOptionsElement = (optionObj) => {
   const $option = $(".options-container");
-  // $("#link-to-text").click(function () {
-  //   $("#option-textet").focus();
-  // });
 
   const html = `<div class="event-option">
   <h4 class="option-title">Option</h4>
@@ -41,6 +40,7 @@ const renderOptions = function (optionsDB) {
 };
 
 
+
 const loadOptions = (options) => {
   console.log(options)
   $(".options-container").empty();
@@ -54,7 +54,6 @@ const loadOptions = (options) => {
 };
 
 
-
 $(document).ready(function () {
 
   $('#dates-form').on('submit', function (event) {
@@ -66,11 +65,20 @@ $(document).ready(function () {
     console.log("SERIALIZED", serializedInput)
     renderOptions(serializedInput);
 
-    return false;
+    $('#send-dates-to-db').on('submit', function (event) {
+      console.log("serialize2: ", serializedInput)
+      const option = serializedInput;
+      $.ajax({
+        method: "POST",
+        URL: "/send-dates-to-db"
+      })
+      .then(() => {
+        const templateVars = { option };
+        res.render("/events/:uniqueurl")
+      })
+      // return false;
+    })
   });
-  $('#send-dates-to-db').on('submit', function (event) {
-    const serializedInput = $(this).serializeArray();
-    console.log(serializedInput)
-    return false;
-  })
+  return false;
 });
+
