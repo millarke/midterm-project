@@ -32,45 +32,54 @@ const createOptionsElement = (optionObj) => {
 
 // takes in a database of options and creates html elements out of each option
 const renderOptions = function (optionsDB) {
-  console.log("options: ", optionsDB)
-  createOptionsElement(optionsDB.reduce((acc, next) => ({
+  // console.log("options: ", optionsDB)
+  createOptionsElement(
+    optionsDB.reduce((acc, next) => ({
     ...acc,
     [next.name]: next.value,
-  }), {}))
+  }),
+  
+  {}
+  
+  ))
 
 };
 
 
-const loadOptions = (options) => {
-  console.log(options)
-  $(".options-container").empty();
-  $.ajax({
-    method: "GET",
-    URL: "/add-dates-to-options",
-  }).then(data => {
-    console.log("loaded the options");
-    renderOptions(data)
-  })
-};
+// const loadOptions = (options) => {
+//   console.log(options)
+//   $(".options-container").empty();
+//   $.ajax({
+//     method: "GET",
+//     URL: "/add-dates-to-options",
+//   }).then(data => {
+//     console.log("loaded the options");
+//     renderOptions(data)
+//   })
+// };
 
 
 
 $(document).ready(function () {
-
+  const  dates = [];
   $('#dates-form').on('submit', function (event) {
     // prevent form submission
-    console.log("running")
+    // console.log("running")
     event.preventDefault();
     const serializedInput = $(this).serializeArray();
-
-    console.log("SERIALIZED", serializedInput)
-    renderOptions(serializedInput);
-
+    renderOptions(serializedInput)
+    // console.log("SERIALIZED", serializedInput)
+    dates.push(serializedInput);
+    // console.log('=================================>', serializedInput)
     return false;
   });
+  
   $('#send-dates-to-db').on('submit', function (event) {
-    const serializedInput = $(this).serializeArray();
-    console.log(serializedInput)
+    console.log('---------------------dates: ', dates)
+    // console.log("=========================> dates: ", dates);
+    const serializedInput = $('#send-dates-to-db').serialize()
+    // const serializedInput = $(this).serializeArray();
+    console.log("sending dates to db: ", event.target)
     return false;
   })
 });
