@@ -94,10 +94,10 @@ app.post('/dates/new', function (req, result) {
     parsedDates.push(JSON.parse(date))
   })
 
-  const eventURL = [];
-  eventURL.push(req.body.eventurl);
+  const eventURL = req.body.eventurl;
+
   // eventURL.push(JSON.parse(req.body.eventurl));
-  // console.log("============>>>", parsedDates)
+  console.log("=========================>>>", parsedDates, eventURL)
 
 
   const addOption = function (db, parsedDate, event_id) {
@@ -114,24 +114,25 @@ app.post('/dates/new', function (req, result) {
         // console.log('we are here now: ', res.rows);
         return res.rows[0];
       })
-      .catch(err => console.error('query error', err.stack))
   };
 
-  db.query(usersRoutes.eventIdQuery, eventURL)
-    .then(res => {
-      const eventId = res.rows[0].id
+  usersRoutes.eventIdQuery(db, eventURL)
+    .then(event => {
+      const eventId = event.id
 
       const datesPromises = parsedDates.map((date) => {
         return addOption(db, date, eventId)
       })
-      Promise.all(datesPromises)
-        .then(() => {
-          result.redirect(`/events/${eventURL}`);
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-    });
+      return Promise.all(datesPromises)
+    })
+    .then(() => {
+      result.redirect(`/events/${eventURL}`);
+      console.log
+    })
+    .catch((err) => {
+      console.error(err)
+      result.status(500).json(err)
+    })
 });
 
 // let currentEventUniqueURL;
@@ -163,24 +164,30 @@ app.get("/events/:uniqueurl", (req, res) => {
   usersRoutes.getDates(db, myURL)
     .then((ans) => {
       // console.log('2222222222222222222', ans.start_date)
-      templateVars.dates = {startDate: ans.start_date, 
-                                      startTime: ans.start_time, 
-                                      endDate: ans.end_date, 
-                                      endTime: ans.end_time};
+      templateVars.dates = {
+        startDate: ans.start_date,
+        startTime: ans.start_time,
+        endDate: ans.end_date,
+        endTime: ans.end_time
+      };
+      return true;
       // console.log('111111111111111111111111111111111111', templateVars)
       // res.render("events", templateVars)
 
       // const templateVars = { }
     })
-  usersRoutes.getUser(db, myURL)
+    .then(() => usersRoutes.getUser(db, myURL))
     .then((row) => {
       // console.log("row: ", row);
       templateVars.event = row;
       templateVars.myURL = myURL;
-      console.log(templateVars) 
+      console.log(";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;", templateVars)
       res.render("events", templateVars);
     })
-    .catch(err => console.error('query error', err.stack));
+    .catch(err =>{
+      console.error('query error', err.stack)
+      res.status(500).send(err)
+    });
 });
 
 app.listen(PORT, () => {

@@ -79,13 +79,11 @@ exports.getDates = getDates;
 const eventIdQuery = function (db, eventURL) {
 
   const queryString = `
-    SELECT * FROM dates
-    JOIN events ON dates.event_id = events.id 
+    SELECT * FROM events
     WHERE events.uniqueurl = $1;
     `;
   return db.query(queryString, [eventURL])
     .then(res => res.rows[0])
-    .catch(err => console.error('eventIdQuery: ', err.message));
 };
 
 exports.eventIdQuery = eventIdQuery;
