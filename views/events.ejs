@@ -33,7 +33,6 @@
   <body>
     <header>
       <%- include("partials/_header") %>
-      <%- event.id %>
     </header>
 
     <%- include("partials/_event_url") %>
@@ -88,34 +87,41 @@
         </tbody>
       </table>
     </form>
-          <section class="add-attendee">
-            <%- include("partials/_add_attendee") %>
-          </section>
-
+        
+    
           <table class="table">
             <thead class="thead-dark">
               <h3 scope="col"><%= event.title %></h3>
-
+              <th scope="row">Attendee</th>
+              
               <% for(let date of dates) { %>
-              <tr>
-                <th scope="col" color="white"><%= date.startDate%> </th>
-                  <th> <%date.startTime%> </th>
-                                    <th> <%=date.endDate,
-                                    date.endTime %></th>
-              </tr>
+              
+               
+                  <th scope="col" color="white">
+                    <%= date.startDate.toLocaleDateString()%> 
+                    <%= date.startTime%>
+                    <%= date.endDate.toLocaleDateString() %>
+                    <%= date.endTime %></th>
+               
+              
               <% } %>
-              <div> dates: <%= JSON.stringify(dates) %> </div>
-
+           
+           
             </thead>
             <tbody>
               <tr>
-                <th scope="row">user1</th>
+                <td>user1</td>
+              <% for(let date of dates) { %>
                 <td><div class="form-check">
                   <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
                 </div></td>
+                <% } %>
               </tr>
+              <!-- need func to add a -->
             </table>
-
-
+  
+            <section class="add-attendee">
+              <%- include("partials/_add_attendee") %>
+            </section>
         </body>
 </html>

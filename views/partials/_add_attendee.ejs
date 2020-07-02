@@ -1,11 +1,11 @@
 <!-- <section> -->
 <h3>Add attendee</h3>
-  <form>
+  <form action="/events/<%= myURL%>/adduser" method="POST">
     <div class="new-name">
-      <input type="text" class="form-control" id="inlineFormInputName" placeholder="New Attendee Name">
+      <input type="text" class="form-control" id="inlineFormInputName" placeholder="New Attendee Name" name="name">
     </div>
     <div class="new-email">
-      <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Email">
+      <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Email" name="email">
     </div>
 
     <div class="form-check">
@@ -16,7 +16,7 @@
     </div>
 
       <div class="add-button">
-        <button type="submit">Add</button>
+        <input type="submit"/>
       </div>
   </form>
 <!-- </section> -->

@@ -110,7 +110,9 @@ app.post('/dates/new', function (req, result) {
 
     return db.query(queryString, [event_id, parsedDate.startDate, parsedDate.startTime, parsedDate.endDate, parsedDate.endTime])
       .then(res => {
-        console.log('11111111111111111111111111111111111111111111111', res.rows)
+        // const dateString = res.rows.split("T", 1)
+
+        // console.log('11111111111111111111111111111111111111111111111split', dateString)
         // console.log('addOption: ', option);
         // console.log('we are here now: ', res.rows);
         return res.rows;
@@ -159,7 +161,7 @@ app.get("/events/:uniqueurl", (req, res) => {
   // console.log("WE ARE HERE");
   const myURL = req.params.uniqueurl;
   // console.log('=========================', eventId)
-  // console.log('------------------------------>', db)
+  console.log('------------------------------>', req.body)
   // usersRoutes.getDates(db, eventId)
   const templateVars = {};
   usersRoutes.getDates(db, myURL)
@@ -174,9 +176,9 @@ app.get("/events/:uniqueurl", (req, res) => {
           endTime: item.end_time
         });
       });
-      
+
       templateVars.dates = dates
-    
+
       return true;
       // console.log('111111111111111111111111111111111111', templateVars)
       // res.render("events", templateVars)
@@ -188,14 +190,31 @@ app.get("/events/:uniqueurl", (req, res) => {
       // console.log("row: ", row);
       templateVars.event = row;
       templateVars.myURL = myURL;
-      console.log(";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;", templateVars)
+      // console.log(";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;", templateVars)
       res.render("events", templateVars);
     })
-    .catch(err =>{
+    .catch(err => {
       console.error('query error', err.stack)
       res.status(500).send(err)
     });
 });
+
+app.post("/events/:uniqueurl/adduser", (req, res) => {
+  const myURL = req.params.uniqueurl;
+  // console.log( '=============================>', myURL)
+  const user = { name: req.body.name, email: req.body.email };
+  usersRoutes.addUser(db, user)
+    .then(() => {
+      const templateVars = { user };
+      res.redirect(`/events/${myURL}`);
+    })
+    .catch(err => console.error('query error', err.stack));
+  })
+
+
+
+
+
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
