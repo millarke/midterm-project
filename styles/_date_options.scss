@@ -1,9 +1,13 @@
 .dates-title {
-  font-family: Arial, Helvetica, sans-serif;
-  text-align: center;
-  padding-top: 1em;
+  font-family: 'Source Sans Pro', sans-serif;
+  text-align: left;
+  margin: 2em;
+  padding: 1em;
+  border: solid;
+  .fa {
+    margin: 1%;
+  }
 }
-
 #events-and-options {
   display: flex;
   flex-direction: row-reverse;
@@ -33,7 +37,7 @@
       display: flex;
       align-items: center;
       border: solid;
-      width: 10em;
+      width: 20em;
       min-height: 30em;
       justify-content: center;
       flex-direction: column;

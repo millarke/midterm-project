@@ -17,6 +17,7 @@
       integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
       crossorigin="anonymous"
     />
+    <link type="text/css" rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,600;1,300&display=swap" rel="stylesheet">
 
     <!-- App CSS -->
@@ -37,18 +38,23 @@
     </header>
 
     <section class="dates-title">
-      <h1>
-        <%- event.title %>
-      </h1>
+        <h3>
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+          <%- event.title %>
+        </h3>
+
       <h4>
+        <i class="fa fa-user" aria-hidden="true"></i>
         <%- user.name %>
       </h4>
 
 
       <h4>
+        <i class="fa fa-location-arrow" aria-hidden="true"></i>
         <%- event.location %>
       </h4>
       <h4>
+        <i class="fa fa-pencil" aria-hidden="true"></i>
         <%- event.description %>
         <%- randoString %>
       </h4>
