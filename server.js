@@ -110,7 +110,9 @@ app.post('/dates/new', function (req, result) {
 
     return db.query(queryString, [event_id, parsedDate.startDate, parsedDate.startTime, parsedDate.endDate, parsedDate.endTime])
       .then(res => {
-        console.log('11111111111111111111111111111111111111111111111', res.rows)
+        // const dateString = res.rows.split("T", 1)
+
+        // console.log('11111111111111111111111111111111111111111111111split', dateString)
         // console.log('addOption: ', option);
         // console.log('we are here now: ', res.rows);
         return res.rows;

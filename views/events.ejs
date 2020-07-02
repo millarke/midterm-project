@@ -96,15 +96,18 @@
               <h3 scope="col"><%= event.title %></h3>
               
               <% for(let date of dates) { %>
-              <tr>
-                <th scope="col" color="white"><%= date.startDate%> </th>
-                  <th> <%date.startTime%> </th>
-                                    <th> <%=date.endDate, 
-                                    date.endTime %></th>
-              </tr>
+              
+                <th>
+                  <th scope="col" color="white">
+                    <%= date.startDate.toLocaleDateString()%> 
+                    <%= date.startTime%>
+                    <%= date.endDate.toLocaleDateString() %>
+                    <%= date.endTime %></th>
+                </th>
+              
               <% } %>
-              <div> dates: <%= JSON.stringify(dates) %> </div>
-
+              <div> dates: <%= JSON.stringify(dates[0]).split("T", 1) %> </div>
+           
             </thead>
             <tbody>
               <tr>
