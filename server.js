@@ -159,23 +159,25 @@ app.get("/events/:uniqueurl", (req, res) => {
   // console.log('=========================', eventId)
   // console.log('------------------------------>', db)
   // usersRoutes.getDates(db, eventId)
-  
+  const templateVars = {}
   usersRoutes.getDates(db, myURL)
     .then((ans) => {
       // console.log('2222222222222222222', ans.start_date)
-      const templateVars = { dates: {startDate: ans.start_date, 
+      templateVars.dates = {startDate: ans.start_date, 
                                       startTime: ans.start_time, 
                                       endDate: ans.end_date, 
-                                      endTime: ans.end_time}};
-      console.log('111111111111111111111111111111111111', templateVars)
-      res.render("events", templateVars)
+                                      endTime: ans.end_time};
+      // console.log('111111111111111111111111111111111111', templateVars)
+      // res.render("events", templateVars)
 
       // const templateVars = { }
     })
   usersRoutes.getUser(db, myURL)
     .then((row) => {
       // console.log("row: ", row);
-      const templateVars = { event: row, myURL: myURL };
+      templateVars.event = row;
+      templateVars.myURL = myURL;
+      console.log(templateVars) 
       res.render("events", templateVars);
     })
     .catch(err => console.error('query error', err.stack));
