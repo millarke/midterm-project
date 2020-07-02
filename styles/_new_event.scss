@@ -7,18 +7,24 @@
 
   .title {
     font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 600;
     padding-top: 1em;
     text-align: center;
   }
 
   .event-form {
     padding: 3em;
-    width: 60%;
+    width: 70%;
+    font-family: 'Source Sans Pro', sans-serif;
 
     .form-control {
       border: solid;
       border-width: 0px 0px 3px 0px;
       background: transparent;
+      -webkit-border-radius: 0;
+      border-radius: 0;
+      -webkit-box-shadow: none;
+      box-shadow: none;
     }
   }
   .next-button {
