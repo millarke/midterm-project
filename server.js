@@ -161,7 +161,7 @@ app.get("/events/:uniqueurl", (req, res) => {
   // console.log("WE ARE HERE");
   const myURL = req.params.uniqueurl;
   // console.log('=========================', eventId)
-  // console.log('------------------------------>', db)
+  console.log('------------------------------>', req.body)
   // usersRoutes.getDates(db, eventId)
   const templateVars = {};
   usersRoutes.getDates(db, myURL)
@@ -200,11 +200,13 @@ app.get("/events/:uniqueurl", (req, res) => {
 });
 
 app.post("/events/:uniqueurl/adduser", (req, res) => {
+  const myURL = req.params.uniqueurl;
+  // console.log( '=============================>', myURL)
   const user = { name: req.body.name, email: req.body.email };
   usersRoutes.addUser(db, user)
     .then(() => {
       const templateVars = { user };
-      res.render(`/events/${myURL}`, templateVars);
+      res.redirect(`/events/${myURL}`);
     })
     .catch(err => console.error('query error', err.stack));
   })
