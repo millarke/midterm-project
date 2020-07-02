@@ -7,9 +7,8 @@
     color: $nav-color;
 
   .logo {
-    background-color:  $nav-bg-color;
-    font-size: $logo-font-size;
-    font-weight: bold;
+    max-width: 30%;
+    height: auto;
     color: #ced9df;
     text-decoration: none;
   }
