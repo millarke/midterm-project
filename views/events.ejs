@@ -96,12 +96,15 @@
             <thead class="thead-dark">
               <h3 scope="col"><%= event.title %></h3>
 
-              <% for(let date in dates) { %>
+              <% for(let date of dates) { %>
               <tr>
-                <th scope="col"><%= dates.startDate, dates.startTime, dates.endDate, dates.endTime %></th>
+                <th scope="col" color="white"><%= date.startDate%> </th>
+                  <th> <%date.startTime%> </th>
+                                    <th> <%=date.endDate,
+                                    date.endTime %></th>
               </tr>
               <% } %>
-
+              <div> dates: <%= JSON.stringify(dates) %> </div>
 
             </thead>
             <tbody>

@@ -70,7 +70,7 @@ const getDates = function (db, eventURL) {
   // console.log(queryString);
 
   return db.query(queryString, [eventURL])
-    .then(res => res.rows[0])
+    .then(res => res.rows)
     .catch(err => console.error('getDates: ', err.message));
 };
 exports.getDates = getDates;
