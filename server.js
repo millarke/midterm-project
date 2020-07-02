@@ -133,7 +133,7 @@ app.post('/dates/new', function (req, result) {
       })
       .catch((err) => {
         console.log(err)
-      }) 
+      })
     });
 });
 

@@ -3,14 +3,14 @@
     justify-content: space-between;
     align-items: center;
     padding: 0 3em;
-    background-color: $nav-bg-color;
-    color: $nav-color;
+    background-color: $colourdarkpurple;
+    color: $colourdarkpurple;
 
   .logo {
-    background-color:  $nav-bg-color;
+    background-color: $colourdarkpurple;
     font-size: $logo-font-size;
     font-weight: bold;
-    color: #ced9df;
+    color: $colourgreenblue;
     text-decoration: none;
   }
 }
@@ -20,7 +20,7 @@
 @media only screen and (min-width: 1024px) {
   .nav-button {
     border: none;
-    background-color: #e29e21;
+    background-color: $colourlightbluepurple;
     padding-left: 1em;
     padding-right: 1em;
     padding-top: 0.5em;
