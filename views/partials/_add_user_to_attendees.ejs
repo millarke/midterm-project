@@ -1,0 +1,62 @@
+<script src="/vendor/inline_table/jquery.tabledit.js"></script>
+<script>
+
+$('#newTable').Tabledit({
+
+  columns: {
+    identifier: [0, 'id'],                    
+    editable: [[1, 'First Name'], [2, 'Last Name']]
+  }
+  
+  });
+  
+  </script>
+
+<table class="table" id="newTable">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">1st option</th>
+      <th scope="col">2nd option</th>
+      <th scope="col">3rd option</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th><input scope="row" type="text">user1</th>
+      <td><div class="form-check">
+        <input class="form-check-input position-static" type="text" id="blankCheckbox" value="option1" aria-label="...">
+      </div></td>
+      <td><div class="form-check">
+        <input class="form-check-input position-static" type="text" id="blankCheckbox" value="option1" aria-label="...">
+      </div></td>
+      <td><div class="form-check">
+        <input class="form-check-input position-static" type="text" id="blankCheckbox" value="option1" aria-label="...">
+      </div></td>
+    </tr>
+    <tr>
+      <th scope="row">user2</th>
+      <td><div class="form-check">
+        <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
+      </div></td>
+      <td><div class="form-check">
+        <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
+      </div></td>
+      <td><div class="form-check">
+        <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
+      </div></td>
+    </tr>
+    <tr>
+      <th scope="row">user3</th>
+      <td><div class="form-check">
+        <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
+      </div></td>
+      <td><div class="form-check">
+        <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
+      </div></td>
+      <td><div class="form-check">
+        <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
+      </div></td>
+    </tr>
+  </tbody>
+</table>

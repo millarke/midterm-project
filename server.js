@@ -57,17 +57,18 @@ const eventsRoutes = require("./routes/events");
 // Separate them into separate routes files (see above).
 
 
-app.post('/add-dates-to-options', function (req, res) {
+// app.post('/add-dates-to-options', function (req, res) {
 
-  console.log('the_start_date:', req.body.startDate);
-  console.log('the_start_time:', req.body.startTime);
-  console.log('the_end_date:', req.body.endDate);
-  console.log('the_ens_time:', req.body.endTime);
-  res.send(200)
-});
+//   console.log('the_start_date:', req.body.startDate);
+//   console.log('the_start_time:', req.body.startTime);
+//   console.log('the_end_date:', req.body.endDate);
+//   console.log('the_ens_time:', req.body.endTime);
+//   // res.send(200)
+// });
 
 //--------- home -----------
 // this section is all good
+
 
 app.get("/", (req, res) => {
   res.redirect("/home");
@@ -81,8 +82,59 @@ app.get("/home", (req, res) => {
 // this section has problems.
 
 // get /new-event works great, no issues though there is a ? in the URL for some reason
-app.get("/new-event", (req, res) =>{
+app.get("/new-event", (req, res) => {
   res.render("new_event");
+});
+
+app.post('/dates/new', function (req, result) {
+  console.log("=============== req: ", req.body)
+
+  const parsedDates = [];
+  req.body.dates.map(date => {
+    parsedDates.push(JSON.parse(date))
+  })
+
+  const eventURL = [];
+  eventURL.push(req.body.eventurl);
+  // eventURL.push(JSON.parse(req.body.eventurl));
+  console.log("============>>>", parsedDates)
+  const eventIdQuery = `
+  SELECT id FROM events
+  WHERE uniqueurl = $1 ;
+  `;
+
+  const addOption = function (db, parsedDate, event_id) {
+    const queryString = `
+    INSERT INTO dates (event_id, start_date, start_time, end_date, end_time)
+    VALUES ($1, $2, $3, $4, $5)
+    RETURNING *;
+    `;
+
+
+    return db.query(queryString, [event_id, parsedDate.startDate, parsedDate.startTime, parsedDate.endDate, parsedDate.endTime])
+      .then(res => {
+        // console.log('addOption: ', option);
+        console.log('we are here now: ', res.rows);
+        return res.rows[0];
+      })
+      .catch(err => console.error('query error', err.stack))
+  };
+
+  db.query(eventIdQuery, eventURL)
+    .then(res => {
+      const eventId = res.rows[0].id
+
+      const datesPromises = parsedDates.map((date) => {
+        return addOption(db, date, eventId)
+      })
+      Promise.all(datesPromises)
+      .then(() =>{
+        result.redirect(`/events/${eventURL}`);
+      })
+      .catch((err) => {
+        console.log(err)
+      }) 
+    });
 });
 
 // let currentEventUniqueURL;
@@ -92,10 +144,10 @@ app.post("/new-event", (req, res) => {
 
   const randoString = generateRandomString();
 
-  const user = {name: req.body.name, email: req.body.email};
+  const user = { name: req.body.name, email: req.body.email };
   usersRoutes.addUser(db, user)
     .then(userDb => {
-      const event = {user_id: userDb.id, title: req.body['event-name'], description: req.body.description, location: req.body.location, uniqueURL: randoString};
+      const event = { user_id: userDb.id, title: req.body['event-name'], description: req.body.description, location: req.body.location, uniqueURL: randoString };
       eventsRoutes.addEvent(db, event)
         .then(() => {
           const templateVars = { randoString, event, user };
@@ -105,14 +157,14 @@ app.post("/new-event", (req, res) => {
     .catch(err => console.error('query error', err.stack));
 });
 
-app.post("/events/:uniqueurl", (req, res) => {
-  console.log("WE ARE HERE");
+app.get("/events/:uniqueurl", (req, res) => {
+  // console.log("WE ARE HERE");
   const myURL = req.params.uniqueurl;
 
   usersRoutes.getUser(db, myURL)
     .then((row) => {
-      console.log("row: ", row);
-      const templateVars = { event: row , myURL: myURL };
+      // console.log("row: ", row);
+      const templateVars = { event: row, myURL: myURL };
       res.render("events", templateVars);
     })
 

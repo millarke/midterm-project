@@ -18,59 +18,62 @@ const createOptionsElement = (optionObj) => {
   //   $("#option-textet").focus();
   // });
 
-  const html = `<div class="event-option">
+  const html = `<div class="event-option" id="option">
   <h4 class="option-title">Option</h4>
   <p class="option-date">Start Date: ${optionObj.startDate}</p>
   <p class="option-date">Start Date: ${optionObj.startTime}</p>
   <div class="arrow">&#x25BD;</div>
   <p class="option-date">End Date: ${optionObj.endDate}</p>
   <p class="option-date">End Date: ${optionObj.endTime}</p>
-</div>`;
-
+  <input name="dates" type="hidden" value=${JSON.stringify(optionObj)} />
+  </div>`;
+  
   $option.prepend(html);
 };
-
 // takes in a database of options and creates html elements out of each option
 const renderOptions = function (optionsDB) {
-  console.log("options: ", optionsDB)
-  createOptionsElement(optionsDB.reduce((acc, next) => ({
+  // console.log("options: ", optionsDB)
+  createOptionsElement(
+    optionsDB.reduce((acc, next) => ({
     ...acc,
     [next.name]: next.value,
-  }), {}))
+  }),
+  
+  {}
+  
+  ))
 
 };
 
 
-const loadOptions = (options) => {
-  console.log(options)
-  $(".options-container").empty();
-  $.ajax({
-    method: "GET",
-    URL: "/add-dates-to-options",
-  }).then(data => {
-    console.log("loaded the options");
-    renderOptions(data)
-  })
-};
+// const loadOptions = (options) => {
+//   console.log(options)
+//   $(".options-container").empty();
+//   $.ajax({
+//     method: "GET",
+//     URL: "/add-dates-to-options",
+//   }).then(data => {
+//     console.log("loaded the options");
+//     renderOptions(data)
+//   })
+// };
 
 
 
 $(document).ready(function () {
-
+  const  dates = [];
   $('#dates-form').on('submit', function (event) {
     // prevent form submission
-    console.log("running")
+    // console.log("running")
     event.preventDefault();
     const serializedInput = $(this).serializeArray();
-
-    console.log("SERIALIZED", serializedInput)
-    renderOptions(serializedInput);
-
+    renderOptions(serializedInput)
+    // console.log("SERIALIZED", serializedInput)
+    dates.push(serializedInput);
+    // console.log('=================================>', serializedInput)
     return false;
   });
-  $('#send-dates-to-db').on('submit', function (event) {
-    const serializedInput = $(this).serializeArray();
-    console.log(serializedInput)
-    return false;
-  })
+  
+ 
+   
 });
