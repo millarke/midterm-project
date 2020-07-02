@@ -110,9 +110,10 @@ app.post('/dates/new', function (req, result) {
 
     return db.query(queryString, [event_id, parsedDate.startDate, parsedDate.startTime, parsedDate.endDate, parsedDate.endTime])
       .then(res => {
+        console.log('11111111111111111111111111111111111111111111111', res.rows)
         // console.log('addOption: ', option);
         // console.log('we are here now: ', res.rows);
-        return res.rows[0];
+        return res.rows;
       })
   };
 
@@ -160,16 +161,22 @@ app.get("/events/:uniqueurl", (req, res) => {
   // console.log('=========================', eventId)
   // console.log('------------------------------>', db)
   // usersRoutes.getDates(db, eventId)
-  const templateVars = {}
+  const templateVars = {};
   usersRoutes.getDates(db, myURL)
     .then((ans) => {
       // console.log('2222222222222222222', ans.start_date)
-      templateVars.dates = {
-        startDate: ans.start_date,
-        startTime: ans.start_time,
-        endDate: ans.end_date,
-        endTime: ans.end_time
-      };
+      let dates = [];
+      ans.map((item) => {
+        dates.push({
+          startDate: item.start_date,
+          startTime: item.start_time,
+          endDate: item.end_date,
+          endTime: item.end_time
+        });
+      });
+      
+      templateVars.dates = dates
+    
       return true;
       // console.log('111111111111111111111111111111111111', templateVars)
       // res.render("events", templateVars)
