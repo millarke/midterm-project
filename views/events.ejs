@@ -94,16 +94,17 @@
           <table class="table">
             <thead class="thead-dark">
               <h3 scope="col"><%= event.title %></h3>
+              <th scope="row">Attendee</th>
               
               <% for(let date of dates) { %>
               
-                <th>
+               
                   <th scope="col" color="white">
                     <%= date.startDate.toLocaleDateString()%> 
                     <%= date.startTime%>
                     <%= date.endDate.toLocaleDateString() %>
                     <%= date.endTime %></th>
-                </th>
+               
               
               <% } %>
               <div> dates: <%= JSON.stringify(dates[0]).split("T", 1) %> </div>
@@ -111,10 +112,12 @@
             </thead>
             <tbody>
               <tr>
-                <th scope="row">user1</th>
+                <td>user1</td>
+              <% for(let date of dates) { %>
                 <td><div class="form-check">
                   <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
                 </div></td>
+                <% } %>
               </tr>
             </table>
   
