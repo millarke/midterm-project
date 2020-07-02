@@ -32,7 +32,6 @@
   <body>
     <header>
       <%- include("partials/_header") %>
-      <%- event.id %>
     </header>
 
     <%- include("partials/_event_url") %>
@@ -87,9 +86,7 @@
         </tbody>
       </table>
     </form>
-          <section class="add-attendee">
-            <%- include("partials/_add_attendee") %>
-          </section>
+        
     
           <table class="table">
             <thead class="thead-dark">
@@ -107,7 +104,7 @@
                
               
               <% } %>
-              <div> dates: <%= JSON.stringify(dates[0]).split("T", 1) %> </div>
+           
            
             </thead>
             <tbody>
@@ -119,8 +116,11 @@
                 </div></td>
                 <% } %>
               </tr>
+              <!-- need func to add a -->
             </table>
   
-  
+            <section class="add-attendee">
+              <%- include("partials/_add_attendee") %>
+            </section>
         </body>
 </html>
