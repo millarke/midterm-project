@@ -91,27 +91,19 @@ app.post('/dates/new', function (req, res) {
 
   const parsedDates = [];
   req.body.dates.map(date => {
-   parsedDates.push(JSON.parse(date))
+    parsedDates.push(JSON.parse(date))
   })
 
   const eventURL = [];
   eventURL.push(req.body.eventurl);
   // eventURL.push(JSON.parse(req.body.eventurl));
-  console.log("============>>>", eventURL)
+  console.log("============>>>", parsedDates)
   const eventIdQuery = `
   SELECT id FROM events
   WHERE uniqueurl = $1 ;
   `;
 
-  db.query(eventIdQuery, eventURL[0])
-  .then(res => {
-    console.log("IS THIS WORKING!", res)
-  })
-  // ${eventurl}
-
-  console.log("---------------------------------------------", db.query(eventIdQuery));
-
-  const addOption = function (db, option) {
+  const addOption = function (db, parsedDate, event_id) {
     const queryString = `
 
 
@@ -121,7 +113,7 @@ app.post('/dates/new', function (req, res) {
     `;
 
 
-    return db.query(queryString, [eventIdQuery, parsedDates.start_date, parsedDate.start_time, parsedDate.end_date, parsedDate.end_time])
+    return db.query(queryString, [event_id, parsedDate.startDate, parsedDate.startTime, parsedDate.endDate, parsedDate.endTime])
       .then(res => {
         // console.log('addOption: ', option);
         console.log('we are here now: ', res.rows);
@@ -130,8 +122,23 @@ app.post('/dates/new', function (req, res) {
       .catch(err => console.error('query error', err.stack))
   };
 
+  db.query(eventIdQuery, eventURL)
+    .then(res => {
+      const eventId = res.rows[0].id
+
+      parsedDates.map((date) => {
+        addOption(db, date, eventId)
+      })
+    
+    })
+  // ${eventurl}
+
+ 
+
+
+
   // const option = { startDate: req.body.startDate, startTime: req.body.startTime, endDate: req.body.endDate, endTime: req.body.endTime }
-  // addOption(db, option);
+ 
   // res.redirect(`/events/${uniqueurl}`);
   res.send(200)
 });
