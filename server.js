@@ -86,7 +86,7 @@ app.get("/new-event", (req, res) => {
   res.render("new_event");
 });
 
-app.post('/dates/new', function (req, res) {
+app.post('/dates/new', function (req, result) {
   console.log("=============== req: ", req.body)
 
   const parsedDates = [];
@@ -105,8 +105,6 @@ app.post('/dates/new', function (req, res) {
 
   const addOption = function (db, parsedDate, event_id) {
     const queryString = `
-
-
     INSERT INTO dates (event_id, start_date, start_time, end_date, end_time)
     VALUES ($1, $2, $3, $4, $5)
     RETURNING *;
@@ -126,21 +124,17 @@ app.post('/dates/new', function (req, res) {
     .then(res => {
       const eventId = res.rows[0].id
 
-      parsedDates.map((date) => {
-        addOption(db, date, eventId)
+      const datesPromises = parsedDates.map((date) => {
+        return addOption(db, date, eventId)
       })
-    
-    })
-  // ${eventurl}
-
- 
-
-
-
-  // const option = { startDate: req.body.startDate, startTime: req.body.startTime, endDate: req.body.endDate, endTime: req.body.endTime }
- 
-  // res.redirect(`/events/${uniqueurl}`);
-  res.send(200)
+      Promise.all(datesPromises)
+      .then(() =>{
+        result.redirect(`/events/${eventURL}`);
+      })
+      .catch((err) => {
+        console.log(err)
+      }) 
+    });
 });
 
 // let currentEventUniqueURL;
