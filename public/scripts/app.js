@@ -45,6 +45,24 @@ const renderOptions = function (optionsDB) {
 
 };
 
+const createTableColumnElement = `
+<table class="table">
+<thead class="thead-dark">
+<% for(let date in dates) { %>
+  <tr>
+    <th scope="col"><%= event.name %></th>
+    <th scope="col"><%= option.dates %></th>
+    </tr>
+</thead>
+<tbody>
+  <tr>
+    <th scope="row">user1</th>
+    <td><div class="form-check">
+      <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
+    </div></td>
+  </tr>
+</table>
+`
 
 // const loadOptions = (options) => {
 //   console.log(options)

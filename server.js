@@ -87,7 +87,7 @@ app.get("/new-event", (req, res) => {
 });
 
 app.post('/dates/new', function (req, result) {
-  console.log("=============== req: ", req.body)
+  // console.log("=============== req: ", req.body)
 
   const parsedDates = [];
   req.body.dates.map(date => {
@@ -97,11 +97,8 @@ app.post('/dates/new', function (req, result) {
   const eventURL = [];
   eventURL.push(req.body.eventurl);
   // eventURL.push(JSON.parse(req.body.eventurl));
-  console.log("============>>>", parsedDates)
-  const eventIdQuery = `
-  SELECT id FROM events
-  WHERE uniqueurl = $1 ;
-  `;
+  // console.log("============>>>", parsedDates)
+
 
   const addOption = function (db, parsedDate, event_id) {
     const queryString = `
@@ -114,13 +111,13 @@ app.post('/dates/new', function (req, result) {
     return db.query(queryString, [event_id, parsedDate.startDate, parsedDate.startTime, parsedDate.endDate, parsedDate.endTime])
       .then(res => {
         // console.log('addOption: ', option);
-        console.log('we are here now: ', res.rows);
+        // console.log('we are here now: ', res.rows);
         return res.rows[0];
       })
       .catch(err => console.error('query error', err.stack))
   };
 
-  db.query(eventIdQuery, eventURL)
+  db.query(usersRoutes.eventIdQuery, eventURL)
     .then(res => {
       const eventId = res.rows[0].id
 
@@ -128,12 +125,12 @@ app.post('/dates/new', function (req, result) {
         return addOption(db, date, eventId)
       })
       Promise.all(datesPromises)
-      .then(() =>{
-        result.redirect(`/events/${eventURL}`);
-      })
-      .catch((err) => {
-        console.log(err)
-      }) 
+        .then(() => {
+          result.redirect(`/events/${eventURL}`);
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     });
 });
 
@@ -143,7 +140,6 @@ app.post('/dates/new', function (req, result) {
 app.post("/new-event", (req, res) => {
 
   const randoString = generateRandomString();
-
   const user = { name: req.body.name, email: req.body.email };
   usersRoutes.addUser(db, user)
     .then(userDb => {
@@ -160,14 +156,28 @@ app.post("/new-event", (req, res) => {
 app.get("/events/:uniqueurl", (req, res) => {
   // console.log("WE ARE HERE");
   const myURL = req.params.uniqueurl;
+  // console.log('=========================', eventId)
+  // console.log('------------------------------>', db)
+  // usersRoutes.getDates(db, eventId)
+  
+  usersRoutes.getDates(db, myURL)
+    .then((ans) => {
+      // console.log('2222222222222222222', ans.start_date)
+      const templateVars = { dates: {startDate: ans.start_date, 
+                                      startTime: ans.start_time, 
+                                      endDate: ans.end_date, 
+                                      endTime: ans.end_time}};
+      console.log('111111111111111111111111111111111111', templateVars)
+      res.render("events", templateVars)
 
+      // const templateVars = { }
+    })
   usersRoutes.getUser(db, myURL)
     .then((row) => {
       // console.log("row: ", row);
       const templateVars = { event: row, myURL: myURL };
       res.render("events", templateVars);
     })
-
     .catch(err => console.error('query error', err.stack));
 });
 

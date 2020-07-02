@@ -6,9 +6,9 @@
  */
 
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
 
-const addUser = function(db, user) {
+const addUser = function (db, user) {
 
   const queryString = `
   INSERT INTO users (name, email)
@@ -22,7 +22,7 @@ const addUser = function(db, user) {
 };
 exports.addUser = addUser;
 
-const getUser = function(db, uniqueURL) {
+const getUser = function (db, uniqueURL) {
 
   const queryString = `
   SELECT *
@@ -32,15 +32,15 @@ const getUser = function(db, uniqueURL) {
   WHERE uniqueurl = $1;
   `;
 
-  console.log(queryString);
+  // console.log(queryString);
 
-  return db.query(queryString, [ uniqueURL ])
+  return db.query(queryString, [uniqueURL])
     .then(res => res.rows[0])
     .catch(err => console.error('getUser: ', err.message));
 };
 exports.getUser = getUser;
 
-const route = function(db) {
+const route = function (db) {
   router.get("/", (req, res) => {
     db.query(`
     SELECT * FROM users;
@@ -59,3 +59,33 @@ const route = function(db) {
 };
 exports.route = route;
 
+const getDates = function (db, eventURL) {
+
+  const queryString = `
+  SELECT * FROM dates
+  JOIN events ON dates.event_id = events.id 
+  WHERE events.uniqueurl = $1;
+  `;
+
+  // console.log(queryString);
+
+  return db.query(queryString, [eventURL])
+    .then(res => res.rows[0])
+    .catch(err => console.error('getDates: ', err.message));
+};
+exports.getDates = getDates;
+
+
+const eventIdQuery = function (db, eventURL) {
+
+  const queryString = `
+    SELECT * FROM dates
+    JOIN events ON dates.event_id = events.id 
+    WHERE events.uniqueurl = $1;
+    `;
+  return db.query(queryString, [eventURL])
+    .then(res => res.rows[0])
+    .catch(err => console.error('eventIdQuery: ', err.message));
+};
+
+exports.eventIdQuery = eventIdQuery;

@@ -90,10 +90,27 @@
           <section class="add-attendee">
             <%- include("partials/_add_attendee") %>
           </section>
-          <section>
-            <%- include("partials/_add_user_to_attendees") %>
-          </section>
-  
+    
+          <table class="table">
+            <thead class="thead-dark">
+              <h3 scope="col"><%= event.title %></h3>
+              
+              <% for(let date in dates) { %>
+              <tr>
+                <th scope="col"><%= dates.startDate, dates.startTime, dates.endDate, dates.endTime %></th>
+              </tr>
+              <% } %>
+                  
+
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">user1</th>
+                <td><div class="form-check">
+                  <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
+                </div></td>
+              </tr>
+            </table>
   
   
         </body>
