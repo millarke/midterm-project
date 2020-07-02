@@ -1,24 +1,35 @@
 
 .main {
-  font-family: Arial, Helvetica, sans-serif;
-  h1 {
-    padding: 0.5em;
-    text-align: center;
-  }
-  .main-button {
-    text-align: center;
-    #home-button {
-      border: none;
-      background-color: #e29e21;
-      padding-left: 1em;
-      padding-right: 1em;
-      padding-top: 0.5em;
-      padding-bottom: 0.5em;
-      font-weight: bold;
+  font-family: 'Source Sans Pro', sans-serif;
+  .main-container {
+    margin: 3em;
+    border: solid;
+    display: flex;
+    flex-direction: column;
+    .main-title {
+      padding: 0.5em;
+      text-align: center;
     }
-    #home-button:hover {
-      transform: scale(1.15,1.15);
-      animation: jiggle 0.5s infinite linear;
+    .instructions {
+      text-align: center;
+    }
+    .main-button {
+      text-align: center;
+      #home-button {
+        border: none;
+        background-color: $lightgreen;
+        padding-left: 1em;
+        padding-right: 1em;
+        padding-top: 0.5em;
+        padding-bottom: 0.5em;
+        font-weight: bold;
+        margin: 1em;
+      }
+      #home-button:hover {
+        transform: scale(1.15,1.15);
+        animation: jiggle 0.5s infinite linear;
+      }
     }
   }
+
 }

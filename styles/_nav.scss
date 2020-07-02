@@ -3,13 +3,11 @@
     justify-content: space-between;
     align-items: center;
     padding: 0 3em;
-    background-color: $nav-bg-color;
-    color: $nav-color;
+    background-color: $darkblue;
 
   .logo {
     max-width: 30%;
     height: auto;
-    color: #ced9df;
     text-decoration: none;
   }
 }
@@ -19,7 +17,7 @@
 @media only screen and (min-width: 1024px) {
   .nav-button {
     border: none;
-    background-color: #e29e21;
+    background-color: $lightgreen;
     padding-left: 1em;
     padding-right: 1em;
     padding-top: 0.5em;
