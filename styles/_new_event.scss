@@ -1,18 +1,30 @@
-section {
+.event-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: solid;
+  margin: 3em;
 
   .title {
     font-family: 'Source Sans Pro', sans-serif;
-    text-align: center;
     padding-top: 1em;
+    text-align: center;
   }
 
   .event-form {
     padding: 3em;
-  }
+    width: 60%;
 
+    .form-control {
+      border: solid;
+      border-width: 0px 0px 3px 0px;
+      background: transparent;
+    }
+  }
   .next-button {
     text-align: right;
     padding-top: 1em;
+
     button {
       border: none;
       background-color: #e29e21;
