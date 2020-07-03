@@ -15,10 +15,10 @@ const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
 const db = new Pool(dbParams);
 db.connect();
+
 // const usersRoute = require('./routes/users.js');
 
 const { generateRandomString } = require("./helpers");
-// const newUrl = generateRandomString();
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -39,15 +39,12 @@ app.use(express.static("public"));
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/users");
 const eventsRoutes = require("./routes/events");
-// const widgetsRoutes = require("./routes/widgets");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 
 // app.use("/api/users", usersRoutes.route(db));
 // app.use("/api/events", eventsRoutes.route(db));
-// we don't need this wigits line below
-// app.use("/api/widgets", widgetsRoutes(db));
 
 // Note: mount other resources here, using the same pattern above
 
@@ -56,15 +53,6 @@ const eventsRoutes = require("./routes/events");
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
-
-// app.post('/add-dates-to-options', function (req, res) {
-
-//   console.log('the_start_date:', req.body.startDate);
-//   console.log('the_start_time:', req.body.startTime);
-//   console.log('the_end_date:', req.body.endDate);
-//   console.log('the_ens_time:', req.body.endTime);
-//   // res.send(200)
-// });
 
 //--------- home -----------
 // this section is all good
@@ -87,18 +75,12 @@ app.get("/new-event", (req, res) => {
 });
 
 app.post('/dates/new', function (req, result) {
-  // console.log("=============== req: ", req.body)
-
   const parsedDates = [];
   req.body.dates.map(date => {
     parsedDates.push(JSON.parse(date))
-  })
+  });
 
   const eventURL = req.body.eventurl;
-
-  // eventURL.push(JSON.parse(req.body.eventurl));
-  // console.log("=========================>>>", parsedDates, eventURL)
-
 
   const addOption = function (db, parsedDate, event_id) {
     const queryString = `
@@ -107,14 +89,8 @@ app.post('/dates/new', function (req, result) {
     RETURNING *;
     `;
 
-
     return db.query(queryString, [event_id, parsedDate.startDate, parsedDate.startTime, parsedDate.endDate, parsedDate.endTime])
       .then(res => {
-        // const dateString = res.rows.split("T", 1)
-
-        // console.log('11111111111111111111111111111111111111111111111split', dateString)
-        // console.log('addOption: ', option);
-        // console.log('we are here now: ', res.rows);
         return res.rows;
       })
   };
@@ -156,18 +132,13 @@ app.post("/new-event", (req, res) => {
 });
 
 app.get("/events/:uniqueurl", (req, res) => {
-  // console.log("WE ARE HERE");
   const myURL = req.params.uniqueurl;
-  // console.log('=========================', eventId)
-  // console.log('------------------------------>', req.body)
-  // usersRoutes.getDates(db, eventId)
   const templateVars = {};
 
   let eventId;
 
   usersRoutes.getDates(db, myURL)
     .then((ans) => {
-      // console.log('2222222222222222222', ans.start_date)
       let dates = [];
       ans.map((item) => {
         dates.push({
@@ -182,29 +153,18 @@ app.get("/events/:uniqueurl", (req, res) => {
       templateVars.dates = dates
 
       return true;
-      // console.log('111111111111111111111111111111111111', templateVars)
-      // res.render("events", templateVars)
 
-      // const templateVars = { }
     })
     .then(() => usersRoutes.getUser(db, myURL))
     .then(() => usersRoutes.eventIdQuery(db, myURL))
     .then(result => {
-      // console.log('resullllllllllllllllllllllllllllllllllllllt', result.id)
-      eventId = result.id
-      eventName = result.title
-      // console.log('eeeeeeeeeeeeeeeeeeeeeeeeeeeeveeeeeeeeeeeeeeeeeeeeeeenttttttttttttttttttt', eventName)
-      // console.log(usersRoutes.getUsersOfEvent(db, eventId))
+      eventId = result.id;
+      eventName = result.title;
       templateVars.eventId = eventId;
       templateVars.title = eventName;
-
-      // templateVars.responses = [];
-      // templateVars.responses = userRoutes.getResponsesOfEvent(db, eventId)
-
       return usersRoutes.getUsersOfEvent(db, eventId)
     })
     .then(users => {
-      // console.log("userswwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww: ", users[0].id);
       templateVars.users = users;
       templateVars.myURL = myURL;
       return false
@@ -214,7 +174,6 @@ app.get("/events/:uniqueurl", (req, res) => {
     })
     .then(responses => {
       templateVars.responses = responses;
-      // console.log(";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;===============================>>>>>>", templateVars)
       res.render("events", templateVars);
     })
     .catch(err => {
@@ -226,14 +185,12 @@ app.get("/events/:uniqueurl", (req, res) => {
 
 app.post("/events/:uniqueurl/adduser", (req, res) => {
   const myURL = req.params.uniqueurl;
-  console.log('=========================1111111111111111====>', req.body[111])
   const body = req.body;
   const dateIds = [];
   for (let bodyKey in body) {
     if (bodyKey !== 'email' && bodyKey !== 'name') {
       dateIds.push(bodyKey);
     }
-    // console.log('iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii', typeof dateIds)
   }
   const user = { name: req.body.name, email: req.body.email };
   usersRoutes.addUser(db, user)
@@ -242,42 +199,26 @@ app.post("/events/:uniqueurl/adduser", (req, res) => {
     })
     .then(() => {
       for (let dateId in dateIds) {
-        // console.log('33333333333333333333333333333333333333333333333333', dateIds[dateId])
         usersRoutes.addResponses(db, user.email, dateIds[dateId])
       }
-
-      console.log(res.rows)
-      // return 
       res.redirect(`/events/${myURL}`);
     })
     .catch(err => console.error('query error', err.stack));
 })
 
-
 app.post("/events/:uniqueurl/delete", (req, res) => {
-  const uniqueurl = req.params.uniqueurl
-  // console.log('00000000000000000000000000000000000', uniqueurl)
-  
+  const uniqueurl = req.params.uniqueurl;
   let userId;
-  
   for(let key in req.body) {
-    // console.log('kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkeys', key)
-    // console.log('kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkeys', req.body[key])
-    userId = req.body[key]
+    userId = req.body[key];
   }
-  
-  // console.log('.................................,reeeeeeeeeeeeq', userId )
   usersRoutes.getUser(db, uniqueurl)
     .then(res => {
-      // console.log('---------------------------reeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeessssssssssssssssss', res)
       return usersRoutes.deleteResponsesWithUser(db, userId)})
     .then(() => {
   res.redirect(`/events/${uniqueurl}`);
 })
 });
-
-
-
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
