@@ -224,8 +224,8 @@ app.post("/events/:uniqueurl/adduser", (req, res) => {
       for (let dateId in dateIds) {
         console.log('33333333333333333333333333333333333333333333333333', dateIds[dateId])
         usersRoutes.addResponses(db, user.email, dateIds[dateId])
-        
       }
+      
       console.log(res.rows)
       // return 
       res.redirect(`/events/${myURL}`);

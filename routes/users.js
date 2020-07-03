@@ -124,3 +124,23 @@ const addResponses = function (db, email, date_id) {
   // .catch(err => console.error('query error', err.stack));
 };
 exports.addResponses = addResponses;
+
+const getUsersOfEvent = function (db, eventId) {
+
+  const queryString = `
+  SELECT DISTINCT users.name FROM dates 
+  JOIN events ON events.id = dates.event_id 
+  JOIN responses ON dates.id = responses.date_id 
+  JOIN users ON users.id = responses.user_id 
+  WHERE dates.event_id = 4;
+  `;
+
+
+
+  // console.log(queryString);
+
+  return db.query(queryString, [eventId])
+    .then(res => res.rows)
+    .catch(err => console.error('getUsersOfEvent: ', err.message));
+};
+exports.getUsersOfEvent = getUser;
