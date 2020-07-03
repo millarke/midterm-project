@@ -88,17 +88,17 @@ const eventIdQuery = function (db, eventURL) {
 
 exports.eventIdQuery = eventIdQuery;
 
-// const addUser = function (db, user) {
+const addResponses = function (user_id, date_id) {
 
-//   const queryString = `
-//   INSERT INTO users (name, email)
-//   VALUES ($1, $2)
-//   RETURNING *;
-//   `;
+  const queryString = `
+  INSERT INTO responses (name, email)
+  VALUES ($1, $2)
+  RETURNING *;
+  `;
   
-//   return db.query(queryString, [user.name, user.email])
+  return db.query(queryString, [user.id, user.date_id])
 
-//     .then(res => res.rows[0]);
-//   // .catch(err => console.error('query error', err.stack));
-// };
-// exports.addUser = addUser;
+    .then(res => res.rows[0]);
+  // .catch(err => console.error('query error', err.stack));
+};
+exports.addResponses = addResponses;

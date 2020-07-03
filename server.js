@@ -207,7 +207,7 @@ app.get("/events/:uniqueurl", (req, res) => {
 
 app.post("/events/:uniqueurl/adduser", (req, res) => {
   const myURL = req.params.uniqueurl;
-  console.log( '=============================>', myURL)
+  console.log( '=========================1111111111111111====>', req.body)
   const checkboxCounter = function() {
     // for (let  ) {
 

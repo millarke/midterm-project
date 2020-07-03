@@ -79,29 +79,24 @@ $(document).ready(function () {
     event.preventDefault();
     const serializedInput = $(this).serializeArray();
     renderOptions(serializedInput)
-    // console.log("SERIALIZED", serializedInput)
+    console.log("SERIALIZED", serializedInput)
     dates.push(serializedInput);
     // console.log('=================================>', serializedInput)
-    return false;
-  });
- 
-  
+  })
 
-
-$(document).ready(function () {
   const  user = [];
-  $('#add-user').on('submit', function (event) {
-    // prevent form submission
-    const serializedInput = $(this).serializeArray();
-    console.log("running", serializedInput)
-    renderOptions(serializedInput)
-    console.log(renderOptions(serializedInput))
-    // console.log("SERIALIZED", serializedInput)
-    user.push(serializedInput);
-    // console.log('=================================>', serializedInput)
-    return false;
-  });
+  // $('#add-user').on('submit', function (event) {
+  //   // prevent form submission
+  //   const serializedInput = $(this).serializeArray();
+  //   console.log("running", serializedInput)
+  //   renderOptions(serializedInput)
+  //   console.log(renderOptions(serializedInput))
+  //   // console.log("SERIALIZED", serializedInput)
+  //   user.push(serializedInput);
+  //   // console.log('=================================>', serializedInput)
+  //   return false;
+  // });
  
    
-});
+
 });
