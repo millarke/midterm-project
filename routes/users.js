@@ -37,24 +37,24 @@ const getUser = function (db, uniqueURL) {
 };
 exports.getUser = getUser;
 
-const route = function (db) {
-  router.get("/", (req, res) => {
-    db.query(`
-    SELECT * FROM users;
-    `)
-      .then(data => {
-        const users = data.rows;
-        res.json({ users });
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-  });
-  return router;
-};
-exports.route = route;
+// const route = function (db) {
+//   router.get("/", (req, res) => {
+//     db.query(`
+//     SELECT * FROM users;
+//     `)
+//       .then(data => {
+//         const users = data.rows;
+//         res.json({ users });
+//       })
+//       .catch(err => {
+//         res
+//           .status(500)
+//           .json({ error: err.message });
+//       });
+//   });
+//   return router;
+// };
+// exports.route = route;
 
 const getDates = function (db, eventURL) {
 

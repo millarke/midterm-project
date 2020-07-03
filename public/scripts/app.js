@@ -1,16 +1,4 @@
 
-// $(() => {
-//   $.ajax({
-//     method: "GET",
-//     url: "/api/users"
-//   }).done((users) => {
-//     for(user of users) {
-//       $("<div>").text(user.name).appendTo($("body"));
-//     }
-//   });
-// });
-
-
 // takes in an option object and returns the html of the options
 const createOptionsElement = (optionObj) => {
   const $option = $(".options-container");
