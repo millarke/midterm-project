@@ -196,6 +196,7 @@ app.get("/events/:uniqueurl", (req, res) => {
       // console.log(";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;===============================>>>>>>", templateVars)
       res.render("events", templateVars);
     })
+    
     .catch(err => {
       console.error('query error', err.stack)
       res.status(500).send(err)
@@ -205,13 +206,28 @@ app.get("/events/:uniqueurl", (req, res) => {
 
 app.post("/events/:uniqueurl/adduser", (req, res) => {
   const myURL = req.params.uniqueurl;
-  console.log('=========================1111111111111111====>', req.body)
-
-
+  console.log('=========================1111111111111111====>', req.body[111])
+  const body = req.body;
+  const dateIds = [];
+ for (let bodyKey in body) {
+   if (bodyKey !== 'email' && bodyKey !== 'name') {
+      dateIds.push(bodyKey);
+   }
+   console.log('iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii', typeof dateIds)
+ }
   const user = { name: req.body.name, email: req.body.email };
   usersRoutes.addUser(db, user)
     .then(() => {
       const templateVars = { user };
+    })
+    .then(() => {
+      for (let dateId in dateIds) {
+        console.log('33333333333333333333333333333333333333333333333333', dateIds[dateId])
+        usersRoutes.addResponses(db, user.email, dateIds[dateId])
+        
+      }
+      console.log(res.rows)
+      // return 
       res.redirect(`/events/${myURL}`);
     })
     .catch(err => console.error('query error', err.stack));

@@ -32,7 +32,7 @@ const getUser = function (db, uniqueURL) {
   WHERE uniqueurl = $1;
   `;
 
-  
+
 
   // console.log(queryString);
 
@@ -95,19 +95,32 @@ const eventIdQuery = function (db, eventURL) {
 
 exports.eventIdQuery = eventIdQuery;
 
-// const addResponses = function (user_id, date_id) {
+const addResponses = function (db, email, date_id) {
 
-//   const query = 
-  
-//   const queryString = `
-//   INSERT INTO responses (name, email)
-//   VALUES ($1, $2)
-//   RETURNING *;
-//   `;
-  
-//   return db.query(queryString, [user.id, user.date_id])
+  const queryUserId = `
+  SELECT users.id FROM users
+  WHERE email = $1;
+  `
 
-//     .then(res => res.rows[0]);
-//   // .catch(err => console.error('query error', err.stack));
-// };
-// exports.addResponses = addResponses;
+  const queryString = `
+  INSERT INTO responses (user_id, date_id)
+  VALUES ($1, $2)
+  RETURNING *;
+  `;
+
+   db.query(queryUserId, [email])
+
+  .then(res => {
+    console.log('1111111111111111111111111111111111111111111111111111111', res.rows[0])  
+    return res.rows[0]
+    
+  })
+  .then(result => {
+    console.log('[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[', result)
+      db.query(queryString, [result.id, date_id])
+     
+      return result.rows
+    })
+  // .catch(err => console.error('query error', err.stack));
+};
+exports.addResponses = addResponses;
