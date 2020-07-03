@@ -1,28 +1,44 @@
 .add-attendee {
   padding-left: 2em;
+  width: 70%;
+  margin-right: auto;
+  margin-left: auto;
+
 
   .new-name, .new-email {
     padding: 0.5em;
-    margin-right: 15em;
   }
 
   .form-check {
-   margin-left: 1.5em;
    padding-bottom: 1em;
-  }
-
-  .add-button {
-    margin-left: 0.5em;
-    margin-bottom: 1em;
-
-    button {
-      border: none;
-      background-color: #e29e21;
-      padding-left: 1em;
-      padding-right: 1em;
-      padding-top: 0.5em;
-      padding-bottom: 0.5em;
-      font-weight: bold;
-    }
+   margin-left: 1em;
   }
 }
+
+ .checkbox-div {
+ color: $darkerblue;
+ background-color: $darkerblue;
+ display: flex;
+ width: 60%;
+
+  .checkbox-element {
+    color: $text;
+  }
+ }
+
+ .add-button {
+   margin-bottom: 1em;
+ }
+
+ .add-header {
+   text-align: center;
+ }
+
+ #add-user {
+   margin-left: auto;
+   margin-right: auto;
+ }
+
+ .end-check {
+   margin-top: 0.5em;
+ }

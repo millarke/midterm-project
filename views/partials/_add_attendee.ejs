@@ -19,23 +19,27 @@
       name="email"
     />
   </div>
-
+<div class="checkbox-div">
   <% let counter = 1; %>
   <% for(let date of dates) { %>
     <div class="form-check">
       <input class="form-check-input" type="checkbox" name="<%-date.dateId%>" />
       <label class="form-check-label" for="autoSizingCheck2">
+        <div class="checkbox-element">
+        <div class="start-check"><h6>Start:</h6>
         <%= date.startDate.toLocaleDateString()%>
-        <%= date.startTime%>
+        <%= date.startTime%></div>
+        <div class="end-check"><h6>End:</h6>
         <%= date.endDate.toLocaleDateString() %>
-        <%= date.endTime %>
+        <%= date.endTime %></div>
+        </div>
       </label>
     </div>
     <% counter++; %>
-    <p><%- counter; %></p>
 <% } %>
+</div>
   <div class="add-button">
-    <input type="submit" />
+    <input class="btn btn-outline-light" type="submit" />
   </div>
 </form>
 <!-- </section> -->
