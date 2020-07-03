@@ -106,11 +106,23 @@
            
             </thead>
             <tbody>
-              <tr class="users-row">
-                <td>user1</td>
-        
+              <tr>
+                <% for(let row in users) { %>
+                <th scope="row"> <%= users[row].name %>
+                </th>
+                <td><div class="form-check">
+                  <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
+                </div></td>
+                <td><div class="form-check">
+                  <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
+                </div></td>
+                <td><div class="form-check">
+                  <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
+                </div></td>
               </tr>
               <!-- need func to add a -->
+              <% } %>
+            </tbody>
             </table>
   
             <section class="add-attendee">
