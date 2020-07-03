@@ -202,7 +202,8 @@ app.get("/events/:uniqueurl", (req, res) => {
       // templateVars.responses = [];
       // templateVars.responses = userRoutes.getResponsesOfEvent(db, eventId)
 
-      return usersRoutes.getUsersOfEvent(db, eventId)})
+      return usersRoutes.getUsersOfEvent(db, eventId)
+    })
     .then(users => {
       // console.log("userswwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww: ", users);
       templateVars.users = users;
@@ -216,7 +217,7 @@ app.get("/events/:uniqueurl", (req, res) => {
       templateVars.responses = responses;
       console.log(";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;===============================>>>>>>", templateVars)
       res.render("events", templateVars);
-    })    
+    })
     .catch(err => {
       console.error('query error', err.stack)
       res.status(500).send(err)
@@ -229,12 +230,12 @@ app.post("/events/:uniqueurl/adduser", (req, res) => {
   console.log('=========================1111111111111111====>', req.body[111])
   const body = req.body;
   const dateIds = [];
- for (let bodyKey in body) {
-   if (bodyKey !== 'email' && bodyKey !== 'name') {
+  for (let bodyKey in body) {
+    if (bodyKey !== 'email' && bodyKey !== 'name') {
       dateIds.push(bodyKey);
-   }
-   console.log('iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii', typeof dateIds)
- }
+    }
+    console.log('iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii', typeof dateIds)
+  }
   const user = { name: req.body.name, email: req.body.email };
   usersRoutes.addUser(db, user)
     .then(() => {
@@ -245,7 +246,7 @@ app.post("/events/:uniqueurl/adduser", (req, res) => {
         console.log('33333333333333333333333333333333333333333333333333', dateIds[dateId])
         usersRoutes.addResponses(db, user.email, dateIds[dateId])
       }
-      
+
       console.log(res.rows)
       // return 
       res.redirect(`/events/${myURL}`);
@@ -254,6 +255,15 @@ app.post("/events/:uniqueurl/adduser", (req, res) => {
 })
 
 
+app.post("/events/:uniqueurl/delete", (req, res) => {
+  const uniqueurl = req.params.uniqueurl
+  console.log('00000000000000000000000000000000000', uniqueurl)
+  usersRoutes.getUser(db, uniqueurl)
+    .then(res => usersRoutes.deleteResponsesWithUser(db, res))
+    .then(() => {
+  res.redirect(`/events/${uniqueurl}`);
+})
+});
 
 
 

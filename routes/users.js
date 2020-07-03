@@ -162,3 +162,18 @@ const getResponsesOfEvent = function (db, eventId) {
     .catch(err => console.error('getUsersOfEvent: ', err.message));
 };
 exports.getResponsesOfEvent = getResponsesOfEvent;
+
+const deleteResponsesWithUser = function (db, userId) {
+
+  const queryString = `
+  DELETE FROM users WHERE users.id = $1;
+  `;
+
+  return db.query(queryString, [userId])
+    .then(res => {
+      console.log('==================================---11111111111111111111111111111--->>>><<<<', res)
+    return res.rows
+    })
+    .catch(err => console.error('getUsersOfEvent: ', err.message));
+};
+exports.deleteResponsesWithUser = deleteResponsesWithUser;
