@@ -56,8 +56,6 @@ const eventsRoutes = require("./routes/events");
 
 //--------- home -----------
 // this section is all good
-
-
 app.get("/", (req, res) => {
   res.redirect("/home");
 });
@@ -112,8 +110,6 @@ app.post('/dates/new', function (req, result) {
       result.status(500).json(err)
     })
 });
-
-// let currentEventUniqueURL;
 
 // this currently adds to the database
 app.post("/new-event", (req, res) => {
