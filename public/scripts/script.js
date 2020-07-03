@@ -9,13 +9,13 @@ new Vue({
   methods: {
       copyTestingCode () {
         let testingCodeToCopy = document.querySelector('#testing-code')
-        testingCodeToCopy.setAttribute('type', 'text')    // 不是 hidden 才能複製
+        testingCodeToCopy.setAttribute('type', 'text')
         testingCodeToCopy.select()
 
         try {
-          var successful = document.execCommand('copy');
-          var msg = successful ? 'successful' : 'unsuccessful';
-          alert('Testing code was copied ' + msg);
+          let successful = document.execCommand('copy');
+          let msg = successful ? 'successful' : 'unsuccessful';
+          alert('copied to clipboard');
         } catch (err) {
           alert('Oops, unable to copy');
         }
@@ -25,5 +25,4 @@ new Vue({
         window.getSelection().removeAllRanges()
       },
   },
-  
 });
