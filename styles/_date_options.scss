@@ -16,6 +16,7 @@
   flex-direction: row-reverse;
   justify-content: space-around;
 
+
   .options-with-button {
     display: flex;
     float: right;
@@ -24,7 +25,6 @@
 
     .send-dates-button {
       border: none;
-      background-color: #e29e21;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -36,10 +36,14 @@
       margin-top: 1em;
       margin-bottom: 1em;
       float: right;
-      opacity: 1;
+      border-radius: 5px;
+      background-color: $text;
+      margin-right: 10em;
+
     }
     .send-dates-button:hover {
-      opacity: 0.6;
+      transform: scale(1.15,1.15);
+      animation: jiggle 0.5s infinite linear;
     }
 
     .options-container {
@@ -47,10 +51,10 @@
       align-items: center;
       border: solid;
       width: 20em;
-      min-height: 30em;
+      min-height: 28em;
       justify-content: center;
       flex-direction: column;
-
+      margin-right: 10em;
 
       .event-option {
         border: solid;
@@ -61,14 +65,16 @@
         justify-content: flex-start;
         flex-direction: column;
         align-items: center;
+        background-color: $text;
 
         .option-title {
-          background-color: $nav-bg-color;
-          color: white;
+          background-color: $darkerblue;
+          color: $text;
           display: flex;
           align-content: center;
           justify-content: center;
           width: 100%;
+          font-family: 'Source Sans Pro', sans-serif;
         }
         .arrow {
           margin-bottom: 0.45em;
@@ -83,17 +89,17 @@
 
 .calendars {
   display: flex;
-  flex-direction: row;
   .start-calendars {
     background: #b1dbc786;
     display: flex;
     flex-direction: column;
     align-content: center;
     padding: 1em;
-    padding-right: 3em;
-    padding-left: 3em;
+    padding-right: 5em;
+    padding-left: 5em;
     text-align: center;
     margin-bottom: 1em;
+    margin-left: 10em;
 
     .start-date, .start-time {
       padding: 0.5em;
@@ -108,15 +114,16 @@
     flex-direction: column;
     align-content: center;
     padding: 1em;
-    padding-right: 3em;
-    padding-left: 3em;
+    padding-right: 5em;
+    padding-left: 5em;
     text-align: center;
     margin-bottom: 1em;
+    margin-left: 10em;
 
     .end-date, .end-time {
       padding: 0.5em;
       border: none;
-     margin-bottom: 1em;
+      margin-bottom: 1em;
     }
   }
   .end-date-button {
@@ -132,5 +139,11 @@
     font-weight: bold;
     margin-top: 0.2em;
     float: right;
+    border-radius: 5px;
+    background-color: $text;
+  }
+  .end-date-button:hover {
+    transform: scale(1.15,1.15);
+    animation: jiggle 0.5s infinite linear;
   }
 }
