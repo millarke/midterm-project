@@ -1,4 +1,5 @@
-// Code for copy to clipboard remember to credit
+// Credit Copyright (c) 2020 by PJCHEN (https://codepen.io/PJCHENder/pen/jamJpj)
+// See LICENSES folder for license
 new Vue({
   el: "#app",
   data: {

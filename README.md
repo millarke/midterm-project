@@ -1,3 +1,36 @@
+
+# Plan·It
+- Plan·It is a clone of Doodle which is used for scheduling events within a group.
+- This was created for a group midterm project as part of our learnings at [Lighthouse Labs.](https://www.lighthouselabs.ca/)
+
+## Requirements
+- Visitors can create an event proposal in much the same way as Doodle, by specifying: 
+  - event title and description
+  - their own name and email 
+  - organizers can then send the unique URL to possible attendees via their own communication workflow (email, Slack, Messenger, etc.) 
+- Attendees visit the unique URL and: 
+  - specify their name and email 
+  - specify their availability (yes/no only) for each possible time slot 
+  - view all responses including their own 
+  - delete responses
+- The unique URL should be auto-generated and difficult to guess 
+- Note: this app does not follow the typical user authentication process: users don't need to register or log in and the only way to access the Plan·It is via links
+
+## Dependencies
+
+- Node 10.x or above
+- NPM 5.x or above
+- PG 6.x
+- body-parser 1.19.0
+- chalk 2.4.2
+- dotenv 2.0.0
+- ejs 2.6.2
+- express 4.17.1
+- morgan 1.9.1
+- node-sass-middleware 0.11.0
+- pg 6.4.2
+- pg-native 3.0.0
+
 LHL Node Skeleton
 =========
 
@@ -35,9 +68,3 @@ The following steps are only for _one_ of the group members to perform.
 - Use the `npm run db:reset` command each time there is a change to the database schema or seeds. 
   - It runs through each of the files, in order, and executes them against the database. 
   - Note: you will lose all newly created (test) data each time this is run, since the schema files will tend to `DROP` the tables and recreate them.
-
-## Dependencies
-
-- Node 10.x or above
-- NPM 5.x or above
-- PG 6.x
