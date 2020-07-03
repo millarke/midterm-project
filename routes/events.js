@@ -20,4 +20,3 @@ const addEvent = function(db, event) {
     .then(res => res.rows);
 };
 exports.addEvent = addEvent;
-

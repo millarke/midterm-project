@@ -39,13 +39,9 @@
 <!-- event form, users can select options -->
           <table class="table">
             <thead class="thead-dark">
-              
               <h3 class="add-header" scope="col"><%= title %></h3>
-
               <th scope="row">Attendee</th>
-
               <% for(let date of dates) { %>
-
                   <th scope="col" color="white">
                     <h6>Start</h6>
                     <%= date.startDate.toLocaleDateString()%>
@@ -55,8 +51,6 @@
                     <%= date.endTime %></th>
               <% } %>
               <th></th>
-
-
             </thead>
             <tbody>
               <tr>
@@ -86,7 +80,6 @@
               <% } %>
             </tbody>
             </table>
-
             <section class="add-attendee">
               <%- include("partials/_add_attendee") %>
             </section>

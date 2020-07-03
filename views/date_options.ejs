@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta
@@ -36,19 +37,15 @@
     <header>
       <%- include("partials/_header") %>
     </header>
-
     <section class="dates-title">
         <h3>
           <i class="fa fa-calendar" aria-hidden="true"></i>
           <%- event.title %>
         </h3>
-
       <h4>
         <i class="fa fa-user" aria-hidden="true"></i>
         <%- user.name %>
       </h4>
-
-
       <h4>
         <i class="fa fa-location-arrow" aria-hidden="true"></i>
         <%- event.location %>
@@ -61,7 +58,6 @@
     </section>
     <h4 class="title-dates">Choose the dates for your Plan:</h4>
     <section id="events-and-options">
-
       <section class="options-with-button" id="options-container">
         <form action="/dates/new" method="POST" id="send-dates-to-db">
           <input type="hidden" name="eventurl" value=<%- randoString %>>
@@ -71,7 +67,6 @@
           <input type="submit" id="send" class="send-dates-button" value="send"/>
         </form>
       </section>
-
       <section class="calendars">
         <form action="add-dates-to-options" method="POST" id="dates-form">
           <section class="start-calendars">
@@ -80,7 +75,6 @@
             <h5>Start Time</h5>
             <input class="start-time" type="time" name="startTime" />
           </section>
-
           <section class="end-calendars">
             <h5>End Date</h5>
             <input class="end-date" type="date" name="endDate" />

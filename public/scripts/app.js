@@ -1,4 +1,3 @@
-
 // takes in an option object and returns the html of the options
 const createOptionsElement = (optionObj) => {
   const $option = $(".options-container");
@@ -58,5 +57,3 @@ $(document).ready(function () {
     return false;
   });
 });
-
-
