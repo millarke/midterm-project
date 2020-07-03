@@ -18,7 +18,6 @@ const addUser = function (db, user) {
 
   return db.query(queryString, [user.name, user.email])
     .then(res => res.rows[0]);
-  // .catch(err => console.error('query error', err.stack));
 };
 exports.addUser = addUser;
 
@@ -31,10 +30,6 @@ const getUser = function (db, uniqueURL) {
   ON users.id = events.user_id
   WHERE uniqueurl = $1;
   `;
-
-
-
-  // console.log(queryString);
 
   return db.query(queryString, [uniqueURL])
     .then(res => res.rows[0])
@@ -63,18 +58,11 @@ exports.route = route;
 
 const getDates = function (db, eventURL) {
 
-  // const queryString = `
-  // SELECT * FROM dates
-  // JOIN events ON dates.event_id = events.id 
-  // WHERE events.uniqueurl = $1;
-  // `;
   const queryString = `
   SELECT dates.id, start_date, start_time, end_date, end_time  FROM dates
-  JOIN events ON dates.event_id = events.id 
+  JOIN events ON dates.event_id = events.id
   WHERE events.uniqueurl = $1;
   `;
-
-  // console.log(queryString);
 
   return db.query(queryString, [eventURL])
     .then(res => res.rows)
@@ -89,6 +77,7 @@ const eventIdQuery = function (db, eventURL) {
     SELECT * FROM events
     WHERE events.uniqueurl = $1;
     `;
+
   return db.query(queryString, [eventURL])
     .then(res => res.rows[0])
 };
@@ -111,33 +100,28 @@ const addResponses = function (db, email, date_id) {
    db.query(queryUserId, [email])
 
   .then(res => {
-    console.log('1111111111111111111111111111111111111111111111111111111', res.rows[0])  
-    return res.rows[0]
-    
+    return res.rows[0];
   })
   .then(result => {
-    console.log('[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[', result)
       db.query(queryString, [result.id, date_id])
-     
-      return result.rows
-    })
-  // .catch(err => console.error('query error', err.stack));
+
+      return result.rows;
+    });
 };
 exports.addResponses = addResponses;
 
 const getUsersOfEvent = function (db, eventId) {
 
   const queryString = `
-  SELECT DISTINCT users.name, users.id FROM dates 
-  JOIN events ON events.id = dates.event_id 
-  JOIN responses ON dates.id = responses.date_id 
-  JOIN users ON users.id = responses.user_id 
+  SELECT DISTINCT users.name, users.id FROM dates
+  JOIN events ON events.id = dates.event_id
+  JOIN responses ON dates.id = responses.date_id
+  JOIN users ON users.id = responses.user_id
   WHERE dates.event_id = $1;
   `;
 
   return db.query(queryString, [eventId])
     .then(res => {
-      console.log('==================================------>>>><<<<', res.rows)
     return res.rows
     })
     .catch(err => console.error('getUsersOfEvent: ', err.message));
@@ -147,16 +131,15 @@ exports.getUsersOfEvent = getUsersOfEvent;
 const getResponsesOfEvent = function (db, eventId) {
 
   const queryString = `
-  SELECT responses.* FROM dates 
-  JOIN events ON events.id = dates.event_id 
-  JOIN responses ON dates.id = responses.date_id 
-  JOIN users ON users.id = responses.user_id 
+  SELECT responses.* FROM dates
+  JOIN events ON events.id = dates.event_id
+  JOIN responses ON dates.id = responses.date_id
+  JOIN users ON users.id = responses.user_id
   WHERE dates.event_id = $1;
   `;
 
   return db.query(queryString, [eventId])
     .then(res => {
-      // console.log('==================================---11111111111111111111111111111--->>>><<<<', res)
     return res.rows
     })
     .catch(err => console.error('getUsersOfEvent: ', err.message));
@@ -171,7 +154,6 @@ const deleteResponsesWithUser = function (db, userId) {
 
   return db.query(queryString, [userId])
     .then(res => {
-      console.log('==================================---11111111111111111111111111111--->>>><<<<', res)
     return res.rows
     })
     .catch(err => console.error('getUsersOfEvent: ', err.message));

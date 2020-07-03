@@ -17,9 +17,7 @@ const addEvent = function(db, event) {
   `;
 
   return db.query(queryString, [event.user_id, event.title, event.description, event.location, event.uniqueURL])
-  // return db.query(queryString, [event.name, event.title, event.description, event.location, event.uniqueURL])
     .then(res => res.rows);
-  // .catch(err => console.error('query error', err.stack));
 };
 exports.addEvent = addEvent;
 
