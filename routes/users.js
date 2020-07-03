@@ -32,6 +32,8 @@ const getUser = function (db, uniqueURL) {
   WHERE uniqueurl = $1;
   `;
 
+  
+
   // console.log(queryString);
 
   return db.query(queryString, [uniqueURL])
@@ -61,8 +63,13 @@ exports.route = route;
 
 const getDates = function (db, eventURL) {
 
+  // const queryString = `
+  // SELECT * FROM dates
+  // JOIN events ON dates.event_id = events.id 
+  // WHERE events.uniqueurl = $1;
+  // `;
   const queryString = `
-  SELECT * FROM dates
+  SELECT dates.id, start_date, start_time, end_date, end_time  FROM dates
   JOIN events ON dates.event_id = events.id 
   WHERE events.uniqueurl = $1;
   `;
@@ -88,17 +95,19 @@ const eventIdQuery = function (db, eventURL) {
 
 exports.eventIdQuery = eventIdQuery;
 
-const addResponses = function (user_id, date_id) {
+// const addResponses = function (user_id, date_id) {
 
-  const queryString = `
-  INSERT INTO responses (name, email)
-  VALUES ($1, $2)
-  RETURNING *;
-  `;
+//   const query = 
   
-  return db.query(queryString, [user.id, user.date_id])
+//   const queryString = `
+//   INSERT INTO responses (name, email)
+//   VALUES ($1, $2)
+//   RETURNING *;
+//   `;
+  
+//   return db.query(queryString, [user.id, user.date_id])
 
-    .then(res => res.rows[0]);
-  // .catch(err => console.error('query error', err.stack));
-};
-exports.addResponses = addResponses;
+//     .then(res => res.rows[0]);
+//   // .catch(err => console.error('query error', err.stack));
+// };
+// exports.addResponses = addResponses;

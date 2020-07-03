@@ -195,9 +195,9 @@ app.get("/events/:uniqueurl", (req, res) => {
       // console.log(";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;", templateVars)
       res.render("events", templateVars);
     })
-    .then((eventGoers) => { usersRoutes.getUsers(db, eventId)
-      templateVars.attendees = eventGoers;
-    })
+    // .then((eventGoers) => { usersRoutes.getUsers(db, eventId)
+    //   templateVars.attendees = eventGoers;
+    // })
     .catch(err => {
       console.error('query error', err.stack)
       res.status(500).send(err)
@@ -208,12 +208,7 @@ app.get("/events/:uniqueurl", (req, res) => {
 app.post("/events/:uniqueurl/adduser", (req, res) => {
   const myURL = req.params.uniqueurl;
   console.log( '=========================1111111111111111====>', req.body)
-  const checkboxCounter = function() {
-    // for (let  ) {
-
-    // }
-  } 
-
+  
 
   const user = { name: req.body.name, email: req.body.email };
   usersRoutes.addUser(db, user)
