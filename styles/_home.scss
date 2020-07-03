@@ -4,7 +4,6 @@
   color: $text;
   .main-container {
     margin: 3em;
-    border: solid #ffffff70;
     display: flex;
     flex-direction: column;
     .main-title {
@@ -18,7 +17,7 @@
       text-align: center;
       #home-button {
         border: none;
-        background-color: $darkerblue;
+        background-color: $lightpurple;
         padding-left: 1em;
         padding-right: 1em;
         padding-top: 0.5em;
@@ -26,7 +25,7 @@
         font-weight: bold;
         margin-bottom: 1em;
         border-radius: 5px;
-        color: $text;
+        color: $darkerblue;
       }
       #home-button:hover {
         transform: scale(1.15,1.15);

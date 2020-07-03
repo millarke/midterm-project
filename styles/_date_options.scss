@@ -53,6 +53,7 @@
       min-height: 28em;
       justify-content: center;
       flex-direction: column;
+      background-color: $text;
       margin-right: 10em;
 
       .event-option {
@@ -89,7 +90,7 @@
 .calendars {
   display: flex;
   .start-calendars {
-    background: #b1dbc786;
+    background: $lightpink;
     display: flex;
     flex-direction: column;
     align-content: center;
@@ -108,7 +109,7 @@
   }
 
   .end-calendars {
-    background: #dbbbb186;
+    background: $lightpurple;
     display: flex;
     flex-direction: column;
     align-content: center;
@@ -127,7 +128,6 @@
   }
   .end-date-button {
     border: none;
-    background-color: #e29e21;
     display: flex;
     align-items: center;
     justify-content: center;

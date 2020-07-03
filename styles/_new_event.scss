@@ -2,9 +2,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: solid;
   margin: 3em;
-  color: #ffffffc0;
+  background-color: $text;
+  color: $darkerblue;
 
   .title {
     font-family: 'Source Sans Pro', sans-serif;
@@ -18,12 +18,11 @@
     font-family: 'Source Sans Pro', sans-serif;
 
     .form-control {
-      border: solid #ffffff88;
+      border: solid $darkerblue;
       border-width: 0px 0px 3px 0px;
       background: transparent;
       border-radius: 0;
       box-shadow: none;
-      color: $text;
     }
     .form-group {
       display: flex;
@@ -46,6 +45,8 @@
       padding-bottom: 0.5em;
       font-weight: bold;
       border-radius: 5px;
+      background-color: $lightblue;
+      color: $text;
     }
     button:hover {
       transform: scale(1.15,1.15);
