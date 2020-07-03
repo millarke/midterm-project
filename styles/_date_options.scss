@@ -4,11 +4,13 @@
   margin: 2em;
   padding: 1em;
   border: solid;
+
   .fa {
     margin: 1%;
   }
 }
 #events-and-options {
+  font-family: 'Source Sans Pro', sans-serif;
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-around;
@@ -25,12 +27,14 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding-left: 3em;
-      padding-right: 3em;
+      padding-left: 1em;
+      padding-right: 1em;
       padding-top: 0.5em;
       padding-bottom: 0.5em;
       font-weight: bold;
       margin-top: 1em;
+      margin-bottom: 1em;
+      float: right;
     }
 
     .options-container {
@@ -117,7 +121,7 @@
     align-items: center;
     justify-content: center;
     padding-left: 0.5em;
-    padding-right: 1em;
+    padding-right: 0.5em;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
     font-weight: bold;

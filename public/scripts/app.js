@@ -19,15 +19,15 @@ const createOptionsElement = (optionObj) => {
   // });
 
   const html = `<div class="event-option" id="option">
-  <h4 class="option-title">Option</h4>
+  <h4 class="option-title">New Option</h4>
   <p class="option-date">Start Date: ${optionObj.startDate}</p>
-  <p class="option-date">Start Date: ${optionObj.startTime}</p>
-  <div class="arrow">&#x25BD;</div>
+  <p class="option-date">Start Time: ${optionObj.startTime}</p>
+  <div><i class="fa fa-chevron-down" aria-hidden="true"></i></div>
   <p class="option-date">End Date: ${optionObj.endDate}</p>
-  <p class="option-date">End Date: ${optionObj.endTime}</p>
+  <p class="option-date">End Time: ${optionObj.endTime}</p>
   <input name="dates" type="hidden" value=${JSON.stringify(optionObj)} />
   </div>`;
-  
+
   $option.prepend(html);
 };
 // takes in a database of options and creates html elements out of each option
@@ -38,9 +38,9 @@ const renderOptions = function (optionsDB) {
     ...acc,
     [next.name]: next.value,
   }),
-  
+
   {}
-  
+
   ))
 
 };
@@ -91,7 +91,7 @@ $(document).ready(function () {
     // console.log('=================================>', serializedInput)
     return false;
   });
-  
- 
-   
+
+
+
 });
