@@ -35,6 +35,10 @@
       margin-top: 1em;
       margin-bottom: 1em;
       float: right;
+      opacity: 1;
+    }
+    .send-dates-button:hover {
+      opacity: 0.6;
     }
 
     .options-container {

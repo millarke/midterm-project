@@ -17,13 +17,14 @@
       text-align: center;
       #home-button {
         border: none;
-        background-color: $lightgreen;
+        background-color: $lightpink;
         padding-left: 1em;
         padding-right: 1em;
         padding-top: 0.5em;
         padding-bottom: 0.5em;
         font-weight: bold;
         margin: 1em;
+        border-radius: 5px
       }
       #home-button:hover {
         transform: scale(1.15,1.15);
