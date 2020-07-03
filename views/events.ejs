@@ -36,22 +36,25 @@
     </header>
 
     <%- include("partials/_event_url") %>
-<!-- event form, users can select options --> 
+<!-- event form, users can select options -->
           <table class="table">
             <thead class="thead-dark">
               <h3 scope="col"><%= title %></h3>
               <th scope="row">Attendee</th>
-              
+
               <% for(let date of dates) { %>
-              
+
                   <th scope="col" color="white">
-                    <%= date.startDate.toLocaleDateString()%> 
-                    <%= date.startTime%>
+                    <p>Start</p>
+                    <%= date.startDate.toLocaleDateString()%>
+                    <%= date.startTime%><br>
+                    <p>End</p>
                     <%= date.endDate.toLocaleDateString() %>
                     <%= date.endTime %></th>
               <% } %>
-           
-           
+              <th></th>
+
+
             </thead>
             <tbody>
               <tr>
@@ -70,20 +73,18 @@
                   <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="..."  <%= checked %>/>
                 </div></td>
                 <% } %>
-                
                 <td>
                   <form method="POST" action="/events/<%- myURL %>/delete">
-                    <button type="submit" class="btn btn-success" name="delete<%- counter %>" value="<%- users[row].id %>">DELETE USER</button>
+                    <button type="submit" class="btn btn-outline-danger" name="delete<%- counter %>" value="<%- users[row].id %>">DELETE</button>
                   </form>
-                 <h3><%- users[row].id %></h3>
-                 <% counter++; %> 
+                 <% counter++; %>
                 </td>
               </tr>
               <!-- need func to add a -->
               <% } %>
             </tbody>
             </table>
-  
+
             <section class="add-attendee">
               <%- include("partials/_add_attendee") %>
             </section>

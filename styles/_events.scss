@@ -1,7 +1,12 @@
 .table {
   font-family: 'Source Sans Pro', sans-serif;
-  color: $text;
+  color: $darkerblue;
   border: solid;
+  width: 90%;
+  text-align: center;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: $text;
 }
 .form-check-label {
   font-family: 'Source Sans Pro', sans-serif;
@@ -18,4 +23,8 @@
 .options-form {
   margin: 2em;
   border: solid 1px;
+}
+
+.add-header {
+  color: $text;
 }
