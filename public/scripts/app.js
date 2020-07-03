@@ -19,7 +19,7 @@ const createOptionsElement = (optionObj) => {
   // });
 
   const html = `<div class="event-option" id="option">
-  <h4 class="option-title">New Option</h4>
+  <h4 class="option-title">Option</h4>
   <p class="option-date">Start Date: ${optionObj.startDate}</p>
   <p class="option-date">Start Time: ${optionObj.startTime}</p>
   <div><i class="fa fa-chevron-down" aria-hidden="true"></i></div>

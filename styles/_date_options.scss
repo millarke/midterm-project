@@ -46,6 +46,7 @@
       justify-content: center;
       flex-direction: column;
 
+
       .event-option {
         border: solid;
         width: 90%;
@@ -77,8 +78,7 @@
 
 .calendars {
   display: flex;
-  flex-direction: column;
-
+  flex-direction: row;
   .start-calendars {
     background: #b1dbc786;
     display: flex;
