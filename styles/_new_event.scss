@@ -4,6 +4,7 @@
   align-items: center;
   border: solid;
   margin: 3em;
+  color: #ffffffc0;
 
   .title {
     font-family: 'Source Sans Pro', sans-serif;
@@ -17,11 +18,12 @@
     font-family: 'Source Sans Pro', sans-serif;
 
     .form-control {
-      border: solid;
+      border: solid #ffffff88;
       border-width: 0px 0px 3px 0px;
       background: transparent;
       border-radius: 0;
       box-shadow: none;
+      color: $text;
     }
     .form-group {
       display: flex;
