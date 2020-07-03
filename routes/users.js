@@ -87,3 +87,18 @@ const eventIdQuery = function (db, eventURL) {
 };
 
 exports.eventIdQuery = eventIdQuery;
+
+// const addUser = function (db, user) {
+
+//   const queryString = `
+//   INSERT INTO users (name, email)
+//   VALUES ($1, $2)
+//   RETURNING *;
+//   `;
+  
+//   return db.query(queryString, [user.name, user.email])
+
+//     .then(res => res.rows[0]);
+//   // .catch(err => console.error('query error', err.stack));
+// };
+// exports.addUser = addUser;

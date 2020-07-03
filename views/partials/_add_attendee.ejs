@@ -1,22 +1,38 @@
 <!-- <section> -->
 <h3>Add attendee</h3>
-  <form action="/events/<%= myURL%>/adduser" method="POST">
-    <div class="new-name">
-      <input type="text" class="form-control" id="inlineFormInputName" placeholder="New Attendee Name" name="name">
-    </div>
-    <div class="new-email">
-      <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Email" name="email">
-    </div>
+<form action="/events/<%= myURL%>/adduser" method="POST" id="add-user" q>
+  <div class="new-name">
+    <input
+      type="text"
+      class="form-control"
+      id="inlineFormInputName"
+      placeholder="New Attendee Name"
+      name="name"
+    />
+  </div>
+  <div class="new-email">
+    <input
+      type="text"
+      class="form-control"
+      id="inlineFormInputGroupUsername"
+      placeholder="Email"
+      name="email"
+    />
+  </div>
 
+  <% for(let date of dates) { %>
     <div class="form-check">
-      <input class="form-check-input" type="checkbox" id="autoSizingCheck2">
-        <label class="form-check-label" for="autoSizingCheck2">
-          Remember me
-        </label>
-    </div>
-
-      <div class="add-button">
-        <input type="submit"/>
-      </div>
-  </form>
+      <input class="form-check-input" type="checkbox" id="autoSizingCheck2" />
+      <label class="form-check-label" for="autoSizingCheck2">
+        <%= date.startDate.toLocaleDateString()%> 
+        <%= date.startTime%>
+        <%= date.endDate.toLocaleDateString() %>
+        <%= date.endTime %>
+      </label>
+    </div>   
+<% } %>
+  <div class="add-button">
+    <input type="submit" />
+  </div>
+</form>
 <!-- </section> -->

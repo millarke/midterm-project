@@ -97,7 +97,7 @@ app.post('/dates/new', function (req, result) {
   const eventURL = req.body.eventurl;
 
   // eventURL.push(JSON.parse(req.body.eventurl));
-  console.log("=========================>>>", parsedDates, eventURL)
+  // console.log("=========================>>>", parsedDates, eventURL)
 
 
   const addOption = function (db, parsedDate, event_id) {
@@ -130,7 +130,6 @@ app.post('/dates/new', function (req, result) {
     })
     .then(() => {
       result.redirect(`/events/${eventURL}`);
-      console.log
     })
     .catch((err) => {
       console.error(err)
@@ -161,9 +160,12 @@ app.get("/events/:uniqueurl", (req, res) => {
   // console.log("WE ARE HERE");
   const myURL = req.params.uniqueurl;
   // console.log('=========================', eventId)
-  console.log('------------------------------>', req.body)
+  // console.log('------------------------------>', req.body)
   // usersRoutes.getDates(db, eventId)
   const templateVars = {};
+  
+  
+
   usersRoutes.getDates(db, myURL)
     .then((ans) => {
       // console.log('2222222222222222222', ans.start_date)
@@ -193,15 +195,19 @@ app.get("/events/:uniqueurl", (req, res) => {
       // console.log(";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;", templateVars)
       res.render("events", templateVars);
     })
+    .then((eventGoers) => { usersRoutes.getUsers(db, eventId)
+      templateVars.attendees = eventGoers;
+    })
     .catch(err => {
       console.error('query error', err.stack)
       res.status(500).send(err)
     });
 });
 
+
 app.post("/events/:uniqueurl/adduser", (req, res) => {
   const myURL = req.params.uniqueurl;
-  // console.log( '=============================>', myURL)
+  console.log( '=============================>', myURL)
   const user = { name: req.body.name, email: req.body.email };
   usersRoutes.addUser(db, user)
     .then(() => {

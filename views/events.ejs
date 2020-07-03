@@ -96,26 +96,19 @@
               
               <% for(let date of dates) { %>
               
-               
                   <th scope="col" color="white">
                     <%= date.startDate.toLocaleDateString()%> 
                     <%= date.startTime%>
                     <%= date.endDate.toLocaleDateString() %>
                     <%= date.endTime %></th>
-               
-              
               <% } %>
            
            
             </thead>
             <tbody>
-              <tr>
+              <tr class="users-row">
                 <td>user1</td>
-              <% for(let date of dates) { %>
-                <td><div class="form-check">
-                  <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
-                </div></td>
-                <% } %>
+        
               </tr>
               <!-- need func to add a -->
             </table>
