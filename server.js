@@ -204,7 +204,7 @@ app.get("/events/:uniqueurl", (req, res) => {
       return usersRoutes.getUsersOfEvent(db, eventId)
     })
     .then(users => {
-      // console.log("userswwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww: ", users);
+      // console.log("userswwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww: ", users[0].id);
       templateVars.users = users;
       templateVars.myURL = myURL;
       return false
@@ -214,7 +214,7 @@ app.get("/events/:uniqueurl", (req, res) => {
     })
     .then(responses => {
       templateVars.responses = responses;
-      console.log(";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;===============================>>>>>>", templateVars)
+      // console.log(";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;===============================>>>>>>", templateVars)
       res.render("events", templateVars);
     })
     .catch(err => {
@@ -233,7 +233,7 @@ app.post("/events/:uniqueurl/adduser", (req, res) => {
     if (bodyKey !== 'email' && bodyKey !== 'name') {
       dateIds.push(bodyKey);
     }
-    console.log('iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii', typeof dateIds)
+    // console.log('iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii', typeof dateIds)
   }
   const user = { name: req.body.name, email: req.body.email };
   usersRoutes.addUser(db, user)
@@ -242,7 +242,7 @@ app.post("/events/:uniqueurl/adduser", (req, res) => {
     })
     .then(() => {
       for (let dateId in dateIds) {
-        console.log('33333333333333333333333333333333333333333333333333', dateIds[dateId])
+        // console.log('33333333333333333333333333333333333333333333333333', dateIds[dateId])
         usersRoutes.addResponses(db, user.email, dateIds[dateId])
       }
 
@@ -256,9 +256,21 @@ app.post("/events/:uniqueurl/adduser", (req, res) => {
 
 app.post("/events/:uniqueurl/delete", (req, res) => {
   const uniqueurl = req.params.uniqueurl
-  console.log('00000000000000000000000000000000000', uniqueurl)
+  // console.log('00000000000000000000000000000000000', uniqueurl)
+  
+  let userId;
+  
+  for(let key in req.body) {
+    // console.log('kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkeys', key)
+    // console.log('kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkeys', req.body[key])
+    userId = req.body[key]
+  }
+  
+  // console.log('.................................,reeeeeeeeeeeeq', userId )
   usersRoutes.getUser(db, uniqueurl)
-    .then(res => usersRoutes.deleteResponsesWithUser(db, res))
+    .then(res => {
+      // console.log('---------------------------reeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeessssssssssssssssss', res)
+      return usersRoutes.deleteResponsesWithUser(db, userId)})
     .then(() => {
   res.redirect(`/events/${uniqueurl}`);
 })

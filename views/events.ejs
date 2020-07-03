@@ -55,6 +55,7 @@
             </thead>
             <tbody>
               <tr>
+                <% let counter = 1; %>
                 <% for(let row in users) { %>
                 <th scope="row"> <%= users[row].name %>
                 </th>
@@ -72,9 +73,10 @@
                 
                 <td>
                   <form method="POST" action="/events/<%- myURL %>/delete">
-                    <button type="submit" class="btn btn-success" value="">DELETE USER</button>
+                    <button type="submit" class="btn btn-success" name="delete<%- counter %>" value="<%- users[row].id %>">DELETE USER</button>
                   </form>
-                 
+                 <h3><%- users[row].id %></h3>
+                 <% counter++; %> 
                 </td>
               </tr>
               <!-- need func to add a -->
