@@ -21,23 +21,3 @@ const addEvent = function(db, event) {
 };
 exports.addEvent = addEvent;
 
-// this doesn't actually do anything yet, if we want it to we'll need to change the route variable at the bottom here and in users.js and both in server.js
-const route = function(db) {
-  router.get("/", (req, res) => {
-    db.query(`
-    SELECT * FROM events;
-    `)
-      .then(data => {
-        const events = data.rows;
-        res.json({ events });
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-  });
-  return router;
-};
-exports.route = route;
-
