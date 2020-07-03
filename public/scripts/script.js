@@ -15,7 +15,6 @@ new Vue({
         try {
           let successful = document.execCommand('copy');
           let msg = successful ? 'successful' : 'unsuccessful';
-          alert('copied to clipboard');
         } catch (err) {
           alert('Oops, unable to copy');
         }
