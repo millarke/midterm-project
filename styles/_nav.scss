@@ -13,24 +13,20 @@
 }
 
 // media queries for Desktop
-@media only screen and (min-width: 1024px) {
-  .nav-button {
-    border: none;
-    background-color: $lightpurple;
-    padding-left: 1em;
-    padding-right: 1em;
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
-    font-weight: bold;
-    opacity: 1;
-  }
-  .nav-button:hover {
-    opacity: 0.6;
-  }
-}
-@media only screen and (max-width: 1023px) {
-  .nav-button {
-    display: none;
-  }
-}
+// @media only screen and (min-width: 1024px) {
+//   .nav-button {
+//     border: none;
+//     background-color: $lightpurple;
+//     padding-left: 1em;
+//     padding-right: 1em;
+//     padding-top: 0.5em;
+//     padding-bottom: 0.5em;
+//     font-weight: bold;
+//   }
+// }
+// @media only screen and (max-width: 1023px) {
+//   .nav-button {
+//     display: none;
+//   }
+// }
 
