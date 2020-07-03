@@ -163,8 +163,8 @@ app.get("/events/:uniqueurl", (req, res) => {
   // console.log('------------------------------>', req.body)
   // usersRoutes.getDates(db, eventId)
   const templateVars = {};
-  
-  
+
+
 
   usersRoutes.getDates(db, myURL)
     .then((ans) => {
@@ -175,7 +175,8 @@ app.get("/events/:uniqueurl", (req, res) => {
           startDate: item.start_date,
           startTime: item.start_time,
           endDate: item.end_date,
-          endTime: item.end_time
+          endTime: item.end_time,
+          dateId: item.id
         });
       });
 
@@ -192,12 +193,9 @@ app.get("/events/:uniqueurl", (req, res) => {
       // console.log("row: ", row);
       templateVars.event = row;
       templateVars.myURL = myURL;
-      // console.log(";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;", templateVars)
+      // console.log(";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;===============================>>>>>>", templateVars)
       res.render("events", templateVars);
     })
-    // .then((eventGoers) => { usersRoutes.getUsers(db, eventId)
-    //   templateVars.attendees = eventGoers;
-    // })
     .catch(err => {
       console.error('query error', err.stack)
       res.status(500).send(err)
@@ -207,8 +205,8 @@ app.get("/events/:uniqueurl", (req, res) => {
 
 app.post("/events/:uniqueurl/adduser", (req, res) => {
   const myURL = req.params.uniqueurl;
-  console.log( '=========================1111111111111111====>', req.body)
-  
+  console.log('=========================1111111111111111====>', req.body)
+
 
   const user = { name: req.body.name, email: req.body.email };
   usersRoutes.addUser(db, user)
@@ -217,7 +215,7 @@ app.post("/events/:uniqueurl/adduser", (req, res) => {
       res.redirect(`/events/${myURL}`);
     })
     .catch(err => console.error('query error', err.stack));
-  })
+})
 
 
 
