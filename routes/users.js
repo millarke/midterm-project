@@ -132,15 +132,14 @@ const getUsersOfEvent = function (db, eventId) {
   JOIN events ON events.id = dates.event_id 
   JOIN responses ON dates.id = responses.date_id 
   JOIN users ON users.id = responses.user_id 
-  WHERE dates.event_id = 4;
+  WHERE dates.event_id = $1;
   `;
 
-
-
-  // console.log(queryString);
-
   return db.query(queryString, [eventId])
-    .then(res => res.rows)
+    .then(res => {
+      console.log('==================================------>>>><<<<', res.rows)
+    return res.rows
+    })
     .catch(err => console.error('getUsersOfEvent: ', err.message));
 };
-exports.getUsersOfEvent = getUser;
+exports.getUsersOfEvent = getUsersOfEvent;

@@ -164,7 +164,7 @@ app.get("/events/:uniqueurl", (req, res) => {
   // usersRoutes.getDates(db, eventId)
   const templateVars = {};
 
-
+  let eventId;
 
   usersRoutes.getDates(db, myURL)
     .then((ans) => {
@@ -189,11 +189,21 @@ app.get("/events/:uniqueurl", (req, res) => {
       // const templateVars = { }
     })
     .then(() => usersRoutes.getUser(db, myURL))
-    .then((row) => {
-      // console.log("row: ", row);
-      templateVars.event = row;
+    .then(() => usersRoutes.eventIdQuery(db, myURL))
+    .then(result => {
+      // console.log('resullllllllllllllllllllllllllllllllllllllt', result.id)
+      eventId = result.id
+      eventName = result.title
+      // console.log('eeeeeeeeeeeeeeeeeeeeeeeeeeeeveeeeeeeeeeeeeeeeeeeeeeenttttttttttttttttttt', eventName)
+      // console.log(usersRoutes.getUsersOfEvent(db, eventId))
+      templateVars.eventId = eventId;
+      templateVars.title = eventName;
+      return usersRoutes.getUsersOfEvent(db, eventId)})
+    .then(users => {
+      // console.log("userswwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww: ", users);
+      templateVars.users = users;
       templateVars.myURL = myURL;
-      // console.log(";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;===============================>>>>>>", templateVars)
+      console.log(";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;===============================>>>>>>", templateVars)
       res.render("events", templateVars);
     })
     
