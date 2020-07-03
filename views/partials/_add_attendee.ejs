@@ -24,7 +24,7 @@
   <% let counter = 1; %>
   <% for(let date of dates) { %>
     <div class="form-check">
-      <input class="form-check-input" type="checkbox" id="autoSizingCheck2" name="<%-date.dateId%>" />
+      <input class="form-check-input" type="checkbox" name="<%-date.dateId%>" />
       <label class="form-check-label" for="autoSizingCheck2">
         <%= date.startDate.toLocaleDateString()%> 
         <%= date.startTime%>

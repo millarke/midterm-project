@@ -141,7 +141,6 @@ app.post('/dates/new', function (req, result) {
 
 // this currently adds to the database
 app.post("/new-event", (req, res) => {
-
   const randoString = generateRandomString();
   const user = { name: req.body.name, email: req.body.email };
   usersRoutes.addUser(db, user)
