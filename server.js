@@ -208,6 +208,13 @@ app.get("/events/:uniqueurl", (req, res) => {
 app.post("/events/:uniqueurl/adduser", (req, res) => {
   const myURL = req.params.uniqueurl;
   console.log( '=============================>', myURL)
+  const checkboxCounter = function() {
+    // for (let  ) {
+
+    // }
+  } 
+
+
   const user = { name: req.body.name, email: req.body.email };
   usersRoutes.addUser(db, user)
     .then(() => {
