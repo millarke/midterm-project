@@ -143,3 +143,22 @@ const getUsersOfEvent = function (db, eventId) {
     .catch(err => console.error('getUsersOfEvent: ', err.message));
 };
 exports.getUsersOfEvent = getUsersOfEvent;
+
+const getResponsesOfEvent = function (db, eventId) {
+
+  const queryString = `
+  SELECT responses.* FROM dates 
+  JOIN events ON events.id = dates.event_id 
+  JOIN responses ON dates.id = responses.date_id 
+  JOIN users ON users.id = responses.user_id 
+  WHERE dates.event_id = $1;
+  `;
+
+  return db.query(queryString, [eventId])
+    .then(res => {
+      // console.log('==================================---11111111111111111111111111111--->>>><<<<', res)
+    return res.rows
+    })
+    .catch(err => console.error('getUsersOfEvent: ', err.message));
+};
+exports.getResponsesOfEvent = getResponsesOfEvent;

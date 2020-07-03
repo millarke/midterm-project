@@ -198,15 +198,25 @@ app.get("/events/:uniqueurl", (req, res) => {
       // console.log(usersRoutes.getUsersOfEvent(db, eventId))
       templateVars.eventId = eventId;
       templateVars.title = eventName;
+
+      // templateVars.responses = [];
+      // templateVars.responses = userRoutes.getResponsesOfEvent(db, eventId)
+
       return usersRoutes.getUsersOfEvent(db, eventId)})
     .then(users => {
       // console.log("userswwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww: ", users);
       templateVars.users = users;
       templateVars.myURL = myURL;
       console.log(";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;===============================>>>>>>", templateVars)
-      res.render("events", templateVars);
+      return false
     })
-    
+    .then(() => {
+      return usersRoutes.getResponsesOfEvent(db, eventId)
+    })
+    .then(responses => {
+      templateVars.responses = responses;
+      res.render("events", templateVars);
+    })    
     .catch(err => {
       console.error('query error', err.stack)
       res.status(500).send(err)
