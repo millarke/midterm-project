@@ -97,7 +97,7 @@ app.post('/dates/new', function (req, result) {
   const eventURL = req.body.eventurl;
 
   // eventURL.push(JSON.parse(req.body.eventurl));
-  console.log("=========================>>>", parsedDates, eventURL)
+  // console.log("=========================>>>", parsedDates, eventURL)
 
 
   const addOption = function (db, parsedDate, event_id) {
@@ -130,7 +130,6 @@ app.post('/dates/new', function (req, result) {
     })
     .then(() => {
       result.redirect(`/events/${eventURL}`);
-      console.log
     })
     .catch((err) => {
       console.error(err)
@@ -142,7 +141,6 @@ app.post('/dates/new', function (req, result) {
 
 // this currently adds to the database
 app.post("/new-event", (req, res) => {
-
   const randoString = generateRandomString();
   const user = { name: req.body.name, email: req.body.email };
   usersRoutes.addUser(db, user)
@@ -161,9 +159,12 @@ app.get("/events/:uniqueurl", (req, res) => {
   // console.log("WE ARE HERE");
   const myURL = req.params.uniqueurl;
   // console.log('=========================', eventId)
-  console.log('------------------------------>', req.body)
+  // console.log('------------------------------>', req.body)
   // usersRoutes.getDates(db, eventId)
   const templateVars = {};
+
+  let eventId;
+
   usersRoutes.getDates(db, myURL)
     .then((ans) => {
       // console.log('2222222222222222222', ans.start_date)
@@ -173,7 +174,8 @@ app.get("/events/:uniqueurl", (req, res) => {
           startDate: item.start_date,
           startTime: item.start_time,
           endDate: item.end_date,
-          endTime: item.end_time
+          endTime: item.end_time,
+          dateId: item.id
         });
       });
 
@@ -186,11 +188,33 @@ app.get("/events/:uniqueurl", (req, res) => {
       // const templateVars = { }
     })
     .then(() => usersRoutes.getUser(db, myURL))
-    .then((row) => {
-      // console.log("row: ", row);
-      templateVars.event = row;
+    .then(() => usersRoutes.eventIdQuery(db, myURL))
+    .then(result => {
+      // console.log('resullllllllllllllllllllllllllllllllllllllt', result.id)
+      eventId = result.id
+      eventName = result.title
+      // console.log('eeeeeeeeeeeeeeeeeeeeeeeeeeeeveeeeeeeeeeeeeeeeeeeeeeenttttttttttttttttttt', eventName)
+      // console.log(usersRoutes.getUsersOfEvent(db, eventId))
+      templateVars.eventId = eventId;
+      templateVars.title = eventName;
+
+      // templateVars.responses = [];
+      // templateVars.responses = userRoutes.getResponsesOfEvent(db, eventId)
+
+      return usersRoutes.getUsersOfEvent(db, eventId)
+    })
+    .then(users => {
+      // console.log("userswwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww: ", users);
+      templateVars.users = users;
       templateVars.myURL = myURL;
-      // console.log(";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;", templateVars)
+      return false
+    })
+    .then(() => {
+      return usersRoutes.getResponsesOfEvent(db, eventId)
+    })
+    .then(responses => {
+      templateVars.responses = responses;
+      console.log(";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;===============================>>>>>>", templateVars)
       res.render("events", templateVars);
     })
     .catch(err => {
@@ -199,19 +223,46 @@ app.get("/events/:uniqueurl", (req, res) => {
     });
 });
 
+
 app.post("/events/:uniqueurl/adduser", (req, res) => {
   const myURL = req.params.uniqueurl;
-  // console.log( '=============================>', myURL)
+  console.log('=========================1111111111111111====>', req.body[111])
+  const body = req.body;
+  const dateIds = [];
+  for (let bodyKey in body) {
+    if (bodyKey !== 'email' && bodyKey !== 'name') {
+      dateIds.push(bodyKey);
+    }
+    console.log('iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii', typeof dateIds)
+  }
   const user = { name: req.body.name, email: req.body.email };
   usersRoutes.addUser(db, user)
     .then(() => {
       const templateVars = { user };
+    })
+    .then(() => {
+      for (let dateId in dateIds) {
+        console.log('33333333333333333333333333333333333333333333333333', dateIds[dateId])
+        usersRoutes.addResponses(db, user.email, dateIds[dateId])
+      }
+
+      console.log(res.rows)
+      // return 
       res.redirect(`/events/${myURL}`);
     })
     .catch(err => console.error('query error', err.stack));
-  })
+})
 
 
+app.post("/events/:uniqueurl/delete", (req, res) => {
+  const uniqueurl = req.params.uniqueurl
+  console.log('00000000000000000000000000000000000', uniqueurl)
+  usersRoutes.getUser(db, uniqueurl)
+    .then(res => usersRoutes.deleteResponsesWithUser(db, res))
+    .then(() => {
+  res.redirect(`/events/${uniqueurl}`);
+})
+});
 
 
 

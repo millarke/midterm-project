@@ -45,36 +45,29 @@ const renderOptions = function (optionsDB) {
 
 };
 
-const createTableColumnElement = `
-<table class="table">
-<thead class="thead-dark">
-<% for(let date in dates) { %>
-  <tr>
-    <th scope="col"><%= event.name %></th>
-    <th scope="col"><%= option.dates %></th>
-    </tr>
-</thead>
-<tbody>
-  <tr>
-    <th scope="row">user1</th>
-    <td><div class="form-check">
-      <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
-    </div></td>
-  </tr>
-</table>
-`
+const createUserRow = (userObj) => {
+  const $user = $(".users-row");
+  // $("#link-to-text").click(function () {
+  //   $("#option-textet").focus();
+  // });
 
-// const loadOptions = (options) => {
-//   console.log(options)
-//   $(".options-container").empty();
-//   $.ajax({
-//     method: "GET",
-//     URL: "/add-dates-to-options",
-//   }).then(data => {
-//     console.log("loaded the options");
-//     renderOptions(data)
-//   })
-// };
+  const html = `
+  <td>${userObj.name}</td>
+  <% for(let date of dates) { %>
+  <td><div class="form-check">
+    <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="${userObj.id}" aria-label="...">
+  </div></td>
+  <% } %>
+</tr>
+</table>`
+
+
+  $user.prepend(html);
+};
+
+
+
+
 
 
 
@@ -86,12 +79,25 @@ $(document).ready(function () {
     event.preventDefault();
     const serializedInput = $(this).serializeArray();
     renderOptions(serializedInput)
-    // console.log("SERIALIZED", serializedInput)
+    console.log("SERIALIZED", serializedInput)
     dates.push(serializedInput);
     // console.log('=================================>', serializedInput)
     return false;
   });
 
-
-
 });
+
+  // const  user = [];
+  // $('#add-user').on('submit', function (event) {
+  //   // prevent form submission
+  //   const serializedInput = $(this).serializeArray();
+  //   console.log("running", serializedInput)
+  //   renderOptions(serializedInput)
+  //   console.log(renderOptions(serializedInput))
+  //   // console.log("SERIALIZED", serializedInput)
+  //   user.push(serializedInput);
+  //   // console.log('=================================>', serializedInput)
+  //   return false;
+  // });
+
+

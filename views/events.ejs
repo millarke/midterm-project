@@ -36,88 +36,50 @@
     </header>
 
     <%- include("partials/_event_url") %>
-<!-- event form, users can select options -->
-    <form class="options-form" action="/create/details" method="POST">
-      <table class="table">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">Name</th>
-            <th scope="col">1st option</th>
-            <th scope="col">2nd option</th>
-            <th scope="col">3rd option</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">user1</th>
-            <td><div class="form-check">
-              <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
-            </div></td>
-            <td><div class="form-check">
-              <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
-            </div></td>
-            <td><div class="form-check">
-              <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
-            </div></td>
-          </tr>
-          <tr>
-            <th scope="row">user2</th>
-            <td><div class="form-check">
-              <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
-            </div></td>
-            <td><div class="form-check">
-              <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
-            </div></td>
-            <td><div class="form-check">
-              <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
-            </div></td>
-          </tr>
-          <tr>
-            <th scope="row">user3</th>
-            <td><div class="form-check">
-              <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
-            </div></td>
-            <td><div class="form-check">
-              <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
-            </div></td>
-            <td><div class="form-check">
-              <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
-            </div></td>
-          </tr>
-        </tbody>
-      </table>
-    </form>
-        
-    
+<!-- event form, users can select options --> 
           <table class="table">
             <thead class="thead-dark">
-              <h3 scope="col"><%= event.title %></h3>
+              <h3 scope="col"><%= title %></h3>
               <th scope="row">Attendee</th>
               
               <% for(let date of dates) { %>
               
-               
                   <th scope="col" color="white">
                     <%= date.startDate.toLocaleDateString()%> 
                     <%= date.startTime%>
                     <%= date.endDate.toLocaleDateString() %>
                     <%= date.endTime %></th>
-               
-              
               <% } %>
            
            
             </thead>
             <tbody>
               <tr>
-                <td>user1</td>
-              <% for(let date of dates) { %>
+                <% for(let row in users) { %>
+                <th scope="row"> <%= users[row].name %>
+                </th>
+                <% for(let date in dates) { %>
+                  <% let checked = "" %>
+                  <% for(let response in responses) { %>
+                    <% if (responses[response].user_id === users[row].id && responses[response].date_id === dates[date].dateId) { %>
+                      <% checked = "checked" %>
+                    <% } %>
+                  <% } %>
                 <td><div class="form-check">
-                  <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
+                  <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="..."  <%= checked %>/>
                 </div></td>
                 <% } %>
+                
+                <td>
+                  <form method="POST" action="/events/<%- myURL %>/delete">
+                    <button type="submit" class="btn btn-success" value="">DELETE USER</button>
+                  </form>
+                 
+                </td>
               </tr>
               <!-- need func to add a -->
+              <% } %>
+            </tbody>
             </table>
   
             <section class="add-attendee">
