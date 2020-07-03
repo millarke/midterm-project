@@ -207,7 +207,6 @@ app.get("/events/:uniqueurl", (req, res) => {
       // console.log("userswwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww: ", users);
       templateVars.users = users;
       templateVars.myURL = myURL;
-      console.log(";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;===============================>>>>>>", templateVars)
       return false
     })
     .then(() => {
@@ -215,6 +214,7 @@ app.get("/events/:uniqueurl", (req, res) => {
     })
     .then(responses => {
       templateVars.responses = responses;
+      console.log(";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;===============================>>>>>>", templateVars)
       res.render("events", templateVars);
     })    
     .catch(err => {

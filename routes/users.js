@@ -128,7 +128,7 @@ exports.addResponses = addResponses;
 const getUsersOfEvent = function (db, eventId) {
 
   const queryString = `
-  SELECT DISTINCT users.name FROM dates 
+  SELECT DISTINCT users.name, users.id FROM dates 
   JOIN events ON events.id = dates.event_id 
   JOIN responses ON dates.id = responses.date_id 
   JOIN users ON users.id = responses.user_id 

@@ -111,9 +111,14 @@
                 <th scope="row"> <%= users[row].name %>
                 </th>
                 <% for(let date in dates) { %>
-               
+                  <% let checked = "" %>
+                  <% for(let response in responses) { %>
+                    <% if (responses[response].user_id === users[row].id && responses[response].date_id === dates[date].dateId) { %>
+                      <% checked = "checked" %>
+                    <% } %>
+                  <% } %>
                 <td><div class="form-check">
-                  <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
+                  <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="..."  <%= checked %>/>
                 </div></td>
                 <% } %>
               </tr>
